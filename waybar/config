@@ -1,0 +1,168 @@
+{
+    "layer": "top",
+    "position": "top",
+    "reload_style_on_change": true,
+    "modules-left": [
+        "sway/workspaces",
+        "custom/mpd",
+        "custom/mpd-progress-bar"
+    ],
+    "modules-center": [
+        "wireplumber#icon",
+        "wireplumber",
+        "backlight#icon",
+        "backlight",
+        "battery#icon",
+        "battery"
+    ],
+    "modules-right": [
+        "custom/audio_idle_inhibitor",
+        "tray",
+        "network#icon",
+        "network",
+        "bluetooth#icon",
+        "bluetooth",
+        "clock",
+        "clock#date"
+    ],
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "on-click": "activate"
+    },
+    "custom/audio_idle_inhibitor": {
+        "format": "{icon}",
+        "exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
+        "exec-if": "which sway-audio-idle-inhibit",
+        "return-type": "json",
+        "format-icons": {
+            "output": "",
+            "input": "",
+            "output-input": "  ",
+            "none": ""
+        }
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%H:%M}",
+        "interval": 10
+    },
+    "clock#date": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%A %d %B %Y}",
+        "interval": 3600
+    },
+    "backlight#icon": {
+        "format": "{icon}",
+        "disable-scroll": true,
+        "format-icons": [
+            ""
+        ]
+    },
+    "backlight": {
+        "format": "{percent}%",
+        "scroll-step": 5
+    },
+    "battery#icon": {
+        "states": {
+            "good": 97,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}",
+        "format-charging": "",
+        "format-plugged": "",
+        "format-full": "",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "interval": 10
+    },
+    "battery": {
+        "states": {
+            "good": 97,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}%",
+        "format-full": "FULL",
+        "interval": 10
+    },
+    "network#icon": {
+        "format-wifi": "",
+        "format-ethernet": "",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "",
+        "format-disconnected": "",
+        "interval": 20,
+        "signal": 1
+    },
+    "network": {
+        "format": "Connected",
+        "format-disconnected": "Disconnected",
+        "interval": 20,
+        "signal": 1
+    },
+    "bluetooth#icon": {
+        "format": ""
+    },
+    "bluetooth": {
+        "format": "On",
+        "format-disabled": "Off",
+        "format-connected": "{device_alias}",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "bluetooth-toggle",
+        "interval": 20
+    },
+    "wireplumber#icon": {
+        "disable-scroll": true,
+        "format": "{icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [
+                "",
+                "",
+                ""
+            ]
+        },
+        "on-click": "pavucontrol",
+        "max-volume": 95
+    },
+    "wireplumber": {
+        "disable-scroll": true,
+        "format": "{volume:2}",
+        "format-muted": "MM",
+        "on-click": "pavucontrol",
+        "max-volume": 95
+    },
+    "custom/mpd": {
+        "format": "♪ {}",
+        "interval": 10,
+        "exec": "bash $XDG_CONFIG_HOME/waybar/scripts/mpd-current-song-formatted.sh",
+        "exec-if": "pgrep mpd",
+        "on-click": "mpc toggle",
+        "on-click-right": "ario"
+    },
+    "custom/mpd-progress-bar": {
+        "format": "█ {} █",
+        "interval": 5,
+        "exec": "bash $XDG_CONFIG_HOME/waybar/scripts/mpd-progress-bar.sh",
+        "exec-if": "pgrep mpd"
+    }
+}

@@ -1,0 +1,33 @@
+font = /usr/share/fonts/TTF/IosevkaCurly-Regular.ttc
+font-size = 14
+
+background-color = #00000099
+
+outline-width = 0
+
+border-width = 1
+border-color = #fff5
+
+prompt-text = ""
+placeholder-text = "What we opening today?"
+placeholder-color = #fff5
+
+input-color = #fff
+
+text-cursor-corner-radius = 2
+
+default-result-color = #abf
+alternate-result-color = #aff
+
+padding-top = 5%
+padding-bottom = 5%
+padding-left = 2%
+padding-right = 2%
+
+hint-font = false
+
+height = 640
+width = 640
+
+#matching-algorithm = fuzzy
+text-cursor = true
