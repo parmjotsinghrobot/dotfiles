@@ -1,0 +1,55 @@
+ignore-empty-password
+daemonize
+
+# fade in the blur over 2 seconds, and have a grace of 1 second
+fade-in=2
+grace=1
+
+# enable the indicator and the clock
+indicator
+clock
+
+# use the last open screen as the wallpaper and run effects
+screenshots
+effect-blur=30x4
+effect-vignette=0.5:0.5
+
+# flash black if the image hasnt loaded
+color=000000
+
+# font config
+font=Source Sans Pro
+font-size=50
+
+# clock positioning (well status as well but ok)
+indicator-idle-visible
+indicator-thickness=0
+indicator-x-position=150
+indicator-y-position=1000
+
+# yes.
+text-color=ffffff
+text-clear-color=ffff88
+text-ver-color=88ffff
+text-wrong-color=ff8888
+
+# make everything invis
+inside-color=00000000
+inside-clear-color=00000000
+inside-ver-color=00000000
+inside-wrong-color=00000000
+
+key-hl-color=00000000
+
+layout-bg-color=00000000
+layout-text-color=ffffff30
+
+line-color=00000000
+line-clear-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+
+ring-color=00000000
+ring-clear-color=00000000
+ring-ver-color=00000000
+ring-wrong-color=00000000
