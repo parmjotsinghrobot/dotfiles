@@ -22,7 +22,7 @@ notification_limit = 5
 indicate_hidden = true
 idle_threshold = 10s
 
-font = "Source Sans Pro 13"
+font = "Iosevka Curly 13"
 
 
 # IMPORTANT: colors have to be defined in quotation marks.
