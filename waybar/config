@@ -8,20 +8,20 @@
         // "custom/mpd-progress-bar"
     ],
     "modules-center": [
+        "sway/window"
+    ],
+    "modules-right": [
+        "custom/audio_idle_inhibitor",
+        "tray",
+        "network",
+        "bluetooth#icon",
+        "bluetooth",
         "wireplumber#icon",
         "wireplumber",
         "backlight#icon",
         "backlight",
         "battery#icon",
-        "battery"
-    ],
-    "modules-right": [
-        "custom/audio_idle_inhibitor",
-        "tray",
-        "network#icon",
-        "network",
-        "bluetooth#icon",
-        "bluetooth",
+        "battery",
         "clock",
         "clock#date"
     ],
@@ -53,7 +53,7 @@
     },
     "clock#date": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%A %d %B %Y}",
+        "format": "{:%a %d/%m/%Y}",
         "interval": 3600
     },
     "backlight#icon": {
@@ -96,27 +96,22 @@
         "format-full": "FULL",
         "interval": 10
     },
-    "network#icon": {
+    "network": {
         "format-wifi": "",
         "format-ethernet": "",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "",
-        "format-disconnected": "",
-        "interval": 20,
-        "signal": 1
-    },
-    "network": {
-        "format": "Connected",
-        "format-disconnected": "Disconnected",
+        "format-disconnected": "",
         "interval": 20,
         "signal": 1
     },
     "bluetooth#icon": {
-        "format": ""
+        "format": "",
+        "format-disabled": "󰂲"
     },
     "bluetooth": {
-        "format": "On",
-        "format-disabled": "Off",
+        "format": "",
+        "format-disabled": "",
         "format-connected": "{device_alias}",
         "tooltip-format": "{controller_alias}\t{controller_address}",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",

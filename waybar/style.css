@@ -45,19 +45,22 @@ window#waybar {
 	padding: 0 5px 0px 10px;
 }
 
+#network {
+	font-size: 12px;
+}
+
+#bluetooth.icon {
+	font-size: 20px;
+}
+
 /* left padding */
 #backlight, #backlight.icon,
 #battery, #battery.icon,
 #bluetooth, #bluetooth.icon,
 #clock,
 #custom-mpd, #custom-mpd-progress-bar,
-#network, #network.icon,
+#network,
 #tray,
-#wireplumber {
+#wireplumber, #wireplumber.icon {
 	padding: 0 0 0 10px;
 }
-
-#wireplumber.icon {
-	padding: 0;
-}
-
