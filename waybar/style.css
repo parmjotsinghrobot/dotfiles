@@ -37,9 +37,9 @@ window#waybar {
 	border-radius: 0.5em; /* 75% rounding */
 }
 
-#custom-mpd-progress-bar {
-	font-size: 3px;
-}
+/* #custom-mpd-progress-bar { */
+/* 	font-size: 3px; */
+/* } */
 
 #clock.date {
 	padding: 0 5px 0px 10px;
