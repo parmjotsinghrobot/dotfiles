@@ -54,7 +54,7 @@ window#waybar {
 }
 
 /* left padding */
-#backlight, #backlight.icon,
+#backlight.icon,
 #battery, #battery.icon,
 #bluetooth, #bluetooth.icon,
 #clock,
@@ -63,4 +63,8 @@ window#waybar {
 #tray,
 #wireplumber, #wireplumber.icon {
 	padding: 0 0 0 10px;
+}
+
+#backlight {
+	padding: 0 0 0 7px;
 }
