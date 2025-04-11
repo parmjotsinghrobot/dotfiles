@@ -49,8 +49,8 @@ window#waybar {
 	font-size: 12px;
 }
 
-#bluetooth.icon {
-	font-size: 20px;
+#bluetooth.icon.disabled {
+	font-size: 18px;
 }
 
 /* left padding */
