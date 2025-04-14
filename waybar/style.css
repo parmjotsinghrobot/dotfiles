@@ -37,6 +37,12 @@ window#waybar {
 	border-radius: 0.5em; /* 75% rounding */
 }
 
+#workspaces button.focused {
+	background-image: linear-gradient(180deg, rgba(38, 90, 150, 0.2), rgba(238, 174, 202, 0.2));
+	color: pink;
+	border-radius: 0.5em; /* 75% rounding */
+}
+
 /* #custom-mpd-progress-bar { */
 /* 	font-size: 3px; */
 /* } */
