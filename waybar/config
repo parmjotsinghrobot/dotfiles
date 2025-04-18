@@ -4,8 +4,7 @@
     "reload_style_on_change": true,
     "modules-left": [
         "sway/workspaces",
-        "custom/mpd"//,
-        // "custom/mpd-progress-bar"
+        "custom/mpd"
     ],
     "modules-center": [
         "sway/window"
@@ -153,11 +152,5 @@
         "exec-if": "pgrep mpd",
         "on-click": "mpc toggle",
         "on-click-right": "ario"
-    } //,
-    // "custom/mpd-progress-bar": {
-    //     "format": "█ {} █",
-    //     "interval": 5,
-    //     "exec": "bash $XDG_CONFIG_HOME/waybar/scripts/mpd-progress-bar.sh",
-    //     "exec-if": "pgrep mpd"
-    // }
+    }
 }
