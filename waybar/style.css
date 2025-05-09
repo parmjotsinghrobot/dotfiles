@@ -29,12 +29,15 @@ window#waybar {
 #workspaces button {
 	background: transparent;
 	padding: 2px;
+	color: white;
 }
 
 #workspaces button:hover {
 	box-shadow: none;
 	background: rgba(255, 255, 255, 0.2);
 	border-radius: 0.5em; /* 75% rounding */
+	/* something changed and now theres two layers of the text - cant seem to figure out what it is so this is temp */
+	color: rgba(0, 0, 0, 0);
 }
 
 #workspaces button.focused {
