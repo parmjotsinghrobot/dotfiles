@@ -24,7 +24,6 @@
         "clock",
         "clock#date"
     ],
-
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
