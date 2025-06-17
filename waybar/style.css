@@ -63,7 +63,7 @@ window#waybar {
 #battery, #battery.icon,
 #bluetooth, #bluetooth.icon,
 #clock,
-#custom-mpd, #custom-mpd-progress-bar,
+#mpris,
 #network,
 #tray,
 #wireplumber, #wireplumber.icon {

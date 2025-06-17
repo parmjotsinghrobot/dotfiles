@@ -4,7 +4,7 @@
     "reload_style_on_change": true,
     "modules-left": [
         "sway/workspaces",
-        "custom/mpd"
+        "mpris"
     ],
     "modules-center": [
         "sway/window"
@@ -28,6 +28,11 @@
         "disable-scroll": true,
         "all-outputs": true,
         "on-click": "activate"
+    },
+    "mpris": {
+		"format": "♪ {player} - {dynamic}",
+		"interval": 5,
+		"dynamic-order": ["title", "artist"],
     },
     "custom/audio_idle_inhibitor": {
         "format": "{icon}",
@@ -143,13 +148,5 @@
         "format-muted": "MM",
         "on-click": "pavucontrol",
         "max-volume": 95
-    },
-    "custom/mpd": {
-        "format": "♪ {}",
-        "interval": 10,
-        "exec": "bash $XDG_CONFIG_HOME/waybar/scripts/mpd-current-song-formatted.sh",
-        "exec-if": "pgrep mpd",
-        "on-click": "mpc toggle",
-        "on-click-right": "ario"
     }
 }
