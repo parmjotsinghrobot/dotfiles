@@ -35,3 +35,9 @@ The original `.config` Git metadata was archived out of the live configuration d
 All 40 regression/integration tests pass with the 69-entry deployment manifest. Fuzzel is now the default app/clipboard/emoji backend; clipboard tests cover binary data and cancellation. Generic Fontconfig families resolve to Iosevka, with emoji and icon families verified separately. Fresh Qt5 and Qt6 offscreen applications both report Iosevka Curly 10. GSettings UI/document/monospace values were changed with private original-value backups and verified by readback. SwayFX validation and Sway/Dunst reloads succeeded.
 
 The Tofi app-history import merged 4,849 prior launches across 56 exact installed-app matches while retaining existing Fuzzel counts; a second preview proposed zero additions. The original Tofi history is unchanged; 115 unmatched old display names are recorded in the private mapping report. No private usage files are committed.
+
+## Qt session propagation fix
+
+The user-manager environment contained QT_QPA_PLATFORMTHEME=qt5ct, but login-manager-started Sway and qpwgraph did not. environment.d alone therefore did not cover normal GUI launches. The shared shell defaults now export the compatibility key, and the Sway Fuzzel command uses a deployed launch-app helper before spawning the launcher. D-Bus/systemd activation is synchronized on reload.
+
+SwayFX validation and reload passed. Invisible Qt5 and Qt6 programs were then launched by the real Sway session through this helper, with no manually injected Qt theme variable. Both reported `qt5ct|Iosevka Curly|#1e1e2e|#f5c2e7`. Regression tests exercise an absent inherited variable and preserve explicit per-app overrides and argument boundaries. All 42 tests pass. Existing qpwgraph/Qt settings processes must be closed and reopened; their environments cannot change through a compositor reload.

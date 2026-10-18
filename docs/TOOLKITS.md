@@ -20,7 +20,9 @@ Kvantum supplies its own palette; `custom_palette=false` prevents the old Frapp√
 
 **Required packages:** `qt5ct`, `qt6ct`, `kvantum` for Qt6 and the matching Qt5 Kvantum style package (`kvantum-qt5` on Arch). The Qt5 style plugin is **absent on this machine**: `/usr/lib/qt/plugins/styles/` currently contains only `libqt5ct-style.so`. With that missing dependency Qt5 still receives the right fonts/icons, but falls back to a light widget style. This is not completed visual acceptance. Install that dependency before the real Qt5 check; no package installation was attempted here.
 
-`environment.d` is read by the systemd user environment generator. It does not retroactively change running apps, and an independently started Sway session must inherit/import the intended environment. After deployment, inspect both `systemctl --user show-environment` and a newly launched GUI application's environment. Use a fresh login; do not assume a compositor reload updates existing processes.
+`environment.d` reaches systemd-managed applications, but this login manager starts `sway` directly; Sway does not inherit that user-manager environment. The shared shell environment now exports `QT_QPA_PLATFORMTHEME=${QT_QPA_PLATFORMTHEME:-qt5ct}`. Sway launches Fuzzel through `~/.local/bin/launch-app`, which sources the shared defaults before executing it, so applications launched by Fuzzel inherit the variable even in an already-running bare Sway session. An `exec_always` command also syncs that default into D-Bus/systemd activation. Explicit per-app overrides are preserved.
+
+Restart existing Qt apps which were launched without the variable. A compositor reload cannot change an existing application's environment. For a terminal opened before this fix, start a new shell, source `~/.config/shell/environment.sh`, or run `~/.local/bin/launch-app qpwgraph`. The important check is the environment of a new app launched through this normal path; a Qt probe with the variable manually injected cannot verify session propagation.
 
 ## Kvantum asset provenance and translucency
 

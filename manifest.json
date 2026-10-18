@@ -64,6 +64,7 @@
     ".gtkrc-2.0",
     ".icons/default/index.theme",
     ".local/bin/clipboard-picker",
+    ".local/bin/launch-app",
     ".local/bin/lock-and-suspend",
     ".local/bin/sticky-notes-daemon.py",
     ".local/share/backgrounds/dotfiles/desktop.jpg",

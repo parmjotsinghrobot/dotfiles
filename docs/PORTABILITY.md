@@ -27,3 +27,5 @@ The sticky-notes daemon remains `exec_always ~/.local/bin/sticky-notes-daemon.py
 ## Local overrides
 
 These optional local files are intentionally absent from the managed file manifest: `shell/environment.local.sh`, `shell/login.local.sh`, `shell/interactive.local.sh` and `sway/machines/local.conf`. Create them in your live XDG config directory. In any such file, use `$HOME`, checked directories and explicit quoting instead of another account's absolute paths. Never put credentials into a tracked profile.
+
+GUI launches use `~/.local/bin/launch-app` to source the same environment defaults as shells. This matters for Qt because login-manager-started Sway does not inherit systemd user-manager variables. Fuzzel inherits the bridge environment and passes it to apps it launches; D-Bus activation is synchronized on each Sway reload. Explicit per-app theme overrides are preserved.

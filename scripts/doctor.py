@@ -91,7 +91,7 @@ def main():
     for relative in (
         '.zshenv', '.config/zsh/zshrc', '.config/kitty/current-theme.conf',
         '.config/sway/swaybar/status.py', '.local/bin/sticky-notes-daemon.py',
-        '.local/bin/clipboard-picker',
+        '.local/bin/clipboard-picker', '.local/bin/launch-app',
         '.config/tofi/scripts/emoji-picker.sh',
         '.config/zsh/themes/passion/passion.zsh-theme',
         '.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh',

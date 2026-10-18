@@ -1,0 +1,11 @@
+#!/bin/sh
+# Give GUI apps the same defaults as shells, even from a bare Sway session.
+if [ "$#" -eq 0 ]; then
+    printf 'Usage: launch-app COMMAND [ARGUMENT ...]\n' >&2
+    exit 2
+fi
+config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+if [ -r "$config_home/shell/environment.sh" ]; then
+    . "$config_home/shell/environment.sh"
+fi
+exec "$@"
