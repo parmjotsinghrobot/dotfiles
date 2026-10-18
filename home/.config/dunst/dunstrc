@@ -20,7 +20,7 @@ icon_position = right
 notification_limit = 5
 indicate_hidden = true
 idle_threshold = 10s
-font = "Noto Sans 10"
+font = "Iosevka Curly 13"
 
 [urgency_low]
 background = "#1e1e2ecc"

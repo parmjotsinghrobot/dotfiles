@@ -1,6 +1,6 @@
 # GTK, Qt, cursors and font ownership
 
-These are source settings for deployment. No running desktop settings were changed during this pass. The contract is [THEME.md](THEME.md): Catppuccin Mocha Pink, Noto Sans 10, Iosevka Curly 10, Papirus-Dark, Mocha Pink cursors at 24, 96 logical DPI and grayscale slight hinting. Output scaling belongs to Sway.
+These are source settings for deployment. No running desktop settings were changed during this pass. The contract is [THEME.md](THEME.md): Catppuccin Mocha Pink, Iosevka Curly 10 for UI and monospace text, Papirus-Dark, Mocha Pink cursors at 24, 96 logical DPI and grayscale slight hinting. Output scaling belongs to Sway.
 
 ## What owns each setting
 
@@ -45,3 +45,7 @@ Kvantum's KDE-specific blur requests are disabled (`blurring=false`, `popup_blur
 - Vendored SVG is byte-identical to the package asset and parses as XML. Kvantum's config intentionally repeats some sections; do not reject that valid upstream format with a strict INI parser.
 
 Still required after deployment: GTK2/3/4, Qt5, Qt6 and XWayland app inspection after fresh login, normal/selection/disabled states, cursor transitions, scaled output changes and actual background opacity. libadwaita apps may constrain theme application independently of GTK settings.
+
+## Monospace follow-up
+
+The user selected Iosevka Curly for all desktop text. GTK2/3/4, Xsettings and Qt5/6 now name it explicitly. Generic Fontconfig text families also select it with Noto Color Emoji fallback; first-family matching leaves explicit icon fonts alone. GSettings UI/document/monospace values are applied with `scripts/apply-ui-fonts.py --apply`, which saves their previous values privately. New Qt offscreen probes verify the font change; earlier Noto Sans measurements above describe the initial migration. Restart apps which retain their fonts at launch.

@@ -25,7 +25,7 @@ Use Base text on a filled Pink selection. A highlighted match can use Pink on Ba
 
 ## Fonts, scale and transparency
 
-- UI: **Noto Sans 10 pt**, explicitly named in GTK, Qt and Xsettings.
+- UI/documents: **Iosevka Curly 10 pt**, explicitly named in GTK, Qt, Xsettings and GSettings. Notifications use **Iosevka Curly 13 pt**, preserving their original font size. Fontconfig generic sans-serif, serif, monospace and system-ui families select Iosevka Curly with Noto Color Emoji fallback.
 - Monospace: **Iosevka Curly 10 pt**, including Kitty. Tofi deliberately uses 14 pt for scanning a launcher; Swaybar uses 9 pt to fit its 26-pixel bar. Icon/emoji fallback may use the installed symbol and emoji fonts.
 - Icons: **Papirus-Dark**. It is an intentional complete icon set, so every icon need not be Pink.
 - Cursor: **catppuccin-mocha-pink-cursors**, size **24**, in Sway, GTK, Xsettings and both user cursor defaults.
@@ -33,7 +33,7 @@ Use Base text on a filled Pink selection. A highlighted match can use Pink on Ba
 - Rendering: antialiasing on, slight hinting, no subpixel rendering. This avoids conflicting RGB assumptions across differently scaled outputs.
 - Use Kitty's **0.8 background opacity** as the reference: Mocha Base with `cc` alpha for Tofi, Swaybar and Dunst; supported Kvantum window/menu backgrounds reduce opacity by 20%. Keep text and controls opaque. GTK/libadwaita and application-rendered surfaces may need opaque backgrounds; do not fade whole windows to force the effect. Swaylock retains its blurred screenshot with translucent indicator surfaces because its native effects do not provide a full-screen Mocha tint. Check all transparency over bright and dark wallpaper. Blur is a compositor effect, not a replacement for contrast.
 
-Noto Sans and Iosevka Curly both resolved to the named families with local `fc-match` on 18 October 2026. The current GTK request for Source Sans Pro falls back to Noto Sans; the contract names the actual installed family directly.
+Iosevka Curly resolves to its installed family. Generic font selection was checked with `fc-match`; explicit icon families and emoji fallback are preserved. Application-specific named fonts can still override generic choices.
 
 ## Assets and provenance
 
@@ -59,7 +59,7 @@ Paths below are relative to `$HOME`; managed copies live under the repo's `home/
 | Displays | `.config/sway/config.d/20-outputs.conf` or its machine-profile replacement | Per-output scale; check laptop/external display transitions |
 | Swaybar | `.config/sway/swaybar/bar.conf`, `status.py` | Preserve existing Mocha/Pink workspace states; semantic status colours; inspect tray and glyph fallback |
 | Tofi | `.config/tofi/config` | Explicit background, foreground, selected row, match, prompt, placeholder and border; check launch, clipboard and emoji menus |
-| GTK3/4 | `.config/gtk-3.0/settings.ini`, `.config/gtk-4.0/settings.ini`, GTK4 CSS/assets links | Mocha Pink, Noto Sans, Papirus-Dark, cursor 24; inspect one app per toolkit |
+| GTK3/4 | `.config/gtk-3.0/settings.ini`, `.config/gtk-4.0/settings.ini`, GTK4 CSS/assets links | Mocha Pink, Iosevka Curly, Papirus-Dark, cursor 24; inspect one app per toolkit |
 | GTK2 | `.gtkrc-2.0`, selected `.config/gtkrc` if actually consumed | Same asset/font choices; resolve missing includes |
 | Xsettings | `.config/xsettingsd/xsettingsd.conf` | Same GTK/font/cursor values and logical DPI; inspect XWayland app |
 | Qt5/Qt6 | `.config/qt5ct/qt5ct.conf`, `.config/qt6ct/qt6ct.conf`, selected palette files, `.config/environment.d/qt.conf` | Same fonts/icons/Mocha palette; verify platform-theme selection separately for both versions |

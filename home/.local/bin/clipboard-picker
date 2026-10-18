@@ -1,0 +1,11 @@
+#!/bin/sh
+# Keep clipboard and app/emoji usage histories separate.
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/fuzzel-menus/clipboard"
+(umask 077 && mkdir -p "$(dirname "$cache")") || exit 1
+
+selection=$(cliphist list | sed 's/\t/ - /g' |
+    fuzzel --dmenu --only-match --cache="$cache") || exit $?
+[ -n "$selection" ] || exit 0
+
+# Keep decoded image/binary data in the pipe; never in a shell variable.
+printf '%s\n' "$selection" | sed '0,/ - /s//\t/' | cliphist decode | wl-copy

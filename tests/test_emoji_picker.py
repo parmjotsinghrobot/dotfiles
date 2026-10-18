@@ -25,6 +25,7 @@ class EmojiPickerTests(unittest.TestCase):
                     'BEMOJI_DB_LOCATION': str(self.db), 'BEMOJI_PICKER': 'tofi',
                     'PICKER_LOG': str(self.root / 'picker.json'),
                     'FAKE_RESULT': '👩🏽‍💻 woman technologist', 'FAKE_STATUS': '0'}
+        self.env.pop('BEMOJI_PICKER', None)
         self.env.pop('BEMOJI_FUZZEL_CACHE', None)
         self.env.pop('BEMOJI_CUSTOM_LIST', None)
         for picker in ('fuzzel', 'tofi'):
@@ -51,10 +52,14 @@ class EmojiPickerTests(unittest.TestCase):
         self.assertIn('😀 grinning face', log['input'])
         self.assertEqual((self.root / 'cache with spaces/bemoji').stat().st_mode & 0o777, 0o700)
 
-    def test_default_stays_tofi(self):
+    def test_default_is_fuzzel(self):
         self.assertEqual(self.invoke().returncode, 0)
+        self.assertEqual(json.loads((self.root / 'picker.json').read_text())['name'], 'fuzzel')
+        self.assertTrue((self.root / 'cache with spaces/bemoji').is_dir())
+
+    def test_tofi_override_is_retained(self):
+        self.assertEqual(self.invoke('--picker', 'tofi').returncode, 0)
         self.assertEqual(json.loads((self.root / 'picker.json').read_text())['name'], 'tofi')
-        self.assertFalse((self.root / 'cache with spaces').exists())
 
     def test_cache_override_is_one_argument(self):
         self.env['BEMOJI_FUZZEL_CACHE'] = str(self.root / 'custom state/emoji counts')

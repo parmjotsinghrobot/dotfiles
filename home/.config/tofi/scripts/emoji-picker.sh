@@ -14,7 +14,7 @@ DEFAULT_CMD=${BEMOJI_DEFAULT_CMD:-}
 CMDS=""
 
 # Picker command order
-PICKERS="${BEMOJI_PICKER:-tofi fuzzel bemenu wofi rofi dmenu ilia}"
+PICKERS="${BEMOJI_PICKER:-fuzzel tofi bemenu wofi rofi dmenu ilia}"
 
 usage() {
     cat >&2 <<EOF

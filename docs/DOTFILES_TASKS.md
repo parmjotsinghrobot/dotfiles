@@ -4,7 +4,7 @@ Audited 18 October 2026. Target: **Catppuccin Mocha, Pink accent**, throughout t
 
 ## Implementation update
 
-The source now lives at `~/dotfiles` on `codex/dotfiles-mocha-pink`, with 67 explicitly deployed home files/links, reusing the full original Git metadata including reflogs and object store. Private original snapshot and per-file deployment/legacy-cleanup rollback journals exist. All 27 tests, live dependency diagnostics, SwayFX configuration validation, and Qt5/Qt6 offscreen palette probes pass. No session reload, logout, lock or suspend was performed. Actual display, fresh-login and hardware checks remain unchecked below. Broader browser/editor/chat/music-app themes remain a later pass.
+The source now lives at `~/dotfiles` on `codex/dotfiles-mocha-pink`, with 69 explicitly deployed home files/links, reusing the full original Git metadata including reflogs and object store. Private original snapshot and per-file deployment/legacy-cleanup rollback journals exist. All 40 tests, live dependency diagnostics, SwayFX configuration validation, and Qt5/Qt6 offscreen palette probes pass. The later Fuzzel/monospace pass reloaded Sway and Dunst and applied the session font preferences. No logout, lock or suspend was forced. Actual display, fresh-login and hardware checks remain unchecked below. Broader browser/editor/chat/music-app themes remain a later pass.
 
 The findings below describe the original audit; checked items record completed implementation.
 
@@ -190,3 +190,7 @@ Suggested layout:
 - Core launch/bind commands are installed; optional emoji typing/X11 commands listed above are missing.
 - `git diff --check` reports three existing trailing-whitespace lines in `sway/config`.
 - The initial audit changed no settings and added only this task list. Subsequent implementation is recorded above; the user installed the missing Qt5 plugin, managed links were applied and nine stale startup entries were archived with rollback.
+
+## Fuzzel and monospace follow-up
+
+Fuzzel is now active for apps, clipboard and emoji with separate native usage caches. The emoji script retains a Tofi override. Iosevka Curly is the UI/document/monospace default across toolkit settings and generic Fontconfig families; Dunst restores its original 13 pt monospace font. Sway and Dunst were reloaded. Tofi app history was converted by exact installed desktop-name matching and merged into Fuzzel; private reports retain unmatched names. See FUZZEL.md, FONTS.md and HISTORY_IMPORT.md.

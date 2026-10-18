@@ -24,8 +24,14 @@ An initial apply failed at a sandbox overlay cross-device rename; its partial ch
 
 ## Remaining direct checks
 
-No compositor reload, logout, service restart, screen lock or suspend was triggered. A fresh graphical login is needed for environment.d changes and to retire any old notes-daemon instance. Inspect Tofi launch/clipboard/emoji menus, notifications, bar/tray, toolkit apps, transparency over bright/dark wallpaper, font fallback and scaled monitors. Test lock/suspend/resume directly. GTK/libadwaita, Qt Quick and app-rendered surfaces can remain opaque. Browser/editor/chat/music-app theme preferences are not comprehensively migrated by this desktop pass.
+During the initial migration no compositor reload, logout, service restart, screen lock or suspend was triggered. The later Fuzzel/monospace pass validated and reloaded Sway and Dunst, with no logout, lock or suspend. A fresh graphical login is needed for environment.d changes and to retire any old notes-daemon instance. Inspect Tofi launch/clipboard/emoji menus, notifications, bar/tray, toolkit apps, transparency over bright/dark wallpaper, font fallback and scaled monitors. Test lock/suspend/resume directly. GTK/libadwaita, Qt Quick and app-rendered surfaces can remain opaque. Browser/editor/chat/music-app theme preferences are not comprehensively migrated by this desktop pass.
 
 Post-staging checks include Git submodule registration and staged whitespace checks; three copied settings files had extra blank EOF lines, corrected before commit.
 
 The original `.config` Git metadata was archived out of the live configuration directory, then a full copy was reused for `~/dotfiles` at the user's request. Original refs/reflogs/hooks/configuration/objects are retained. Both old and current repositories shared original HEAD `4eddbe874a62d70152f3e3e41075915a1aecd6ec` and 27 reachable commits before the migration commit. Registered submodules resolve all three original pinned SHAs.
+
+## Active Fuzzel and monospace follow-up
+
+All 40 regression/integration tests pass with the 69-entry deployment manifest. Fuzzel is now the default app/clipboard/emoji backend; clipboard tests cover binary data and cancellation. Generic Fontconfig families resolve to Iosevka, with emoji and icon families verified separately. Fresh Qt5 and Qt6 offscreen applications both report Iosevka Curly 10. GSettings UI/document/monospace values were changed with private original-value backups and verified by readback. SwayFX validation and Sway/Dunst reloads succeeded.
+
+The Tofi app-history import merged 4,849 prior launches across 56 exact installed-app matches while retaining existing Fuzzel counts; a second preview proposed zero additions. The original Tofi history is unchanged; 115 unmatched old display names are recorded in the private mapping report. No private usage files are committed.

@@ -8,4 +8,3 @@ pacman-contrib
 pavucontrol
 thunar
 git-lfs
-fuzzel

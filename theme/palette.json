@@ -39,7 +39,7 @@
   },
   "fonts": {
     "ui": {
-      "family": "Noto Sans",
+      "family": "Iosevka Curly",
       "size_pt": 10
     },
     "monospace": {
@@ -53,6 +53,10 @@
     "bar": {
       "family": "Iosevka Curly",
       "size_pt": 9
+    },
+    "notification": {
+      "family": "Iosevka Curly",
+      "size_pt": 13
     }
   },
   "assets": {

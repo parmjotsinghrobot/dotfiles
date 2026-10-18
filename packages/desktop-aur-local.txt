@@ -2,5 +2,4 @@
 antidot-bin
 swayfx
 swaylock-effects-git
-tofi
 zen-browser-bin

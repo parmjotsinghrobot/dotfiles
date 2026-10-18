@@ -13,7 +13,7 @@ REQUIRED = {
     'sway': 'swayfx (the FX fork is required)', 'swaymsg': 'swayfx',
     'swaybar': 'swayfx', 'swaybg': 'swaybg', 'swaylock': 'swaylock-effects-git',
     'swayidle': 'swayidle', 'kitty': 'kitty', 'zen-browser': 'zen-browser-bin',
-    'tofi': 'tofi', 'tofi-drun': 'tofi', 'dunst': 'dunst', 'udiskie': 'udiskie',
+    'fuzzel': 'fuzzel', 'dunst': 'dunst', 'udiskie': 'udiskie',
     'nm-applet': 'network-manager-applet', 'cliphist': 'cliphist',
     'wl-copy': 'wl-clipboard', 'wl-paste': 'wl-clipboard', 'autotiling': 'autotiling',
     'micro': 'micro', 'grim': 'grim', 'slurp': 'slurp', 'brightnessctl': 'brightnessctl',
@@ -21,7 +21,7 @@ REQUIRED = {
     'antidot': 'antidot-bin', 'zsh': 'zsh', 'git': 'git', 'curl': 'curl',
     'fc-match': 'fontconfig', 'xdg-user-dir': 'xdg-user-dirs', 'gpgconf': 'gnupg',
 }
-OPTIONAL = {'fuzzel': 'fuzzel; optional launcher/emoji trial',
+OPTIONAL = {'tofi': 'tofi; retained fallback launcher',
             'checkupdates': 'pacman-contrib; optional update greeting',
             'wtype': 'wtype; emoji typing on Wayland',
             'xclip': 'xclip; emoji clipboard on X11',
@@ -71,7 +71,7 @@ def main():
     ):
         result = run(sys.executable, '-B', '-c', code)
         check(result.returncode == 0, f'Python {label}', result.stderr.strip())
-    for family in ('Iosevka Curly', 'Noto Sans', 'Noto Color Emoji',
+    for family in ('Iosevka Curly', 'Noto Color Emoji',
                    'Font Awesome 5 Free', 'Font Awesome 5 Brands', 'Symbols Nerd Font'):
         result = run('fc-match', '-f', '%{family}', family)
         matched = result.stdout.strip()
@@ -91,6 +91,7 @@ def main():
     for relative in (
         '.zshenv', '.config/zsh/zshrc', '.config/kitty/current-theme.conf',
         '.config/sway/swaybar/status.py', '.local/bin/sticky-notes-daemon.py',
+        '.local/bin/clipboard-picker',
         '.config/tofi/scripts/emoji-picker.sh',
         '.config/zsh/themes/passion/passion.zsh-theme',
         '.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh',

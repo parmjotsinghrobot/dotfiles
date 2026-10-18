@@ -7,9 +7,11 @@ cliphist
 curl
 dunst
 fontconfig
+fuzzel
 git
 gnupg
 grim
+gsettings-desktop-schemas
 kitty
 less
 micro

@@ -55,13 +55,13 @@ Edit managed files here after deployment. Some graphical settings tools, includi
 
 Theme policy and component coverage are in [THEME.md](docs/THEME.md). Machine-specific input/output and toolchain settings are described in [PORTABILITY.md](docs/PORTABILITY.md). Changes requiring a real desktop check remain listed in [the task list](docs/DOTFILES_TASKS.md).
 
-## Launcher comparison
+## Launcher and fonts
 
-[Fuzzel trial and emoji history](docs/FUZZEL.md) describes the optional themed Fuzzel setup. Tofi stays on the existing bindings while comparing.
+[Fuzzel and emoji history](docs/FUZZEL.md) describes the active launcher, clipboard and emoji menus. Tofi remains an optional fallback. Iosevka Curly is the default UI/document/monospace family; apply session GSettings on a fresh machine with `python3 scripts/apply-ui-fonts.py --apply`.
 
 ## Desktop basics
 
-Super+Space launches Tofi, Super+Q opens Kitty, Super+B opens the browser, Super+V opens clipboard history, and Super+F1 opens the emoji picker. Super+Shift+C reloads Sway. Super+Escape locks and suspends. Read the managed keybind config for the full list.
+Super+Space launches Fuzzel, Super+Q opens Kitty, Super+B opens the browser, Super+V opens clipboard history, and Super+F1 opens the emoji picker. Super+Shift+C reloads Sway. Super+Escape locks and suspends. Read the managed keybind config for the full list.
 
 The active bar is native Swaybar with a Python status script. SwayFX and swaylock-effects are required for configured visual effects. Swaybar controls, tray behaviour and limitations are documented alongside its files.
 

@@ -24,7 +24,7 @@ The bar uses Python, PyGObject and the **Playerctl 2.0 GI namespace** (`python`,
 | Asset | Installed package/source | Setting |
 | --- | --- | --- |
 | Monospace | `ttc-iosevka-curly`; [Iosevka](https://typeof.net/Iosevka/) | Iosevka Curly |
-| UI | `noto-fonts` | Noto Sans; old Source Sans Pro requests fall back on this machine |
+| UI/documents/monospace | `ttc-iosevka-curly` | Iosevka Curly; notifications retain 13 pt, UI defaults use 10 pt |
 | Emoji fallback | `noto-fonts-emoji` | Noto Color Emoji |
 | Bar icons | `ttf-font-awesome-5` (foreign) | Font Awesome 5 Free / Brands; Font Awesome 7 is not the same family |
 | Additional bar symbols | `ttf-nerd-fonts-symbols`, `ttf-nerd-fonts-symbols-mono` | Symbols Nerd Font / Symbols Nerd Font Mono |
@@ -44,7 +44,7 @@ The wallpaper was copied from `~/Pictures/Wallpapers/leo-auckland-harbour-catppu
 
 `checkupdates` comes from `pacman-contrib`. It is optional and can contact mirrors when explicitly used by the shell; the doctor never runs it. `antidot` is currently provided by `antidot-bin` and is sourced during shell initialization. Peaclock is an optional shell alias.
 
-The emoji script defaults to the Wayland clipboard (`tofi`, `wl-copy`). Wayland typing additionally needs `wtype`; X11 clipboard/typing need `xclip`/`xdotool`. All three are absent in the snapshot and are **not** core desktop requirements. The picker stores lists under `${BEMOJI_DB_LOCATION:-${XDG_DATA_HOME:-$HOME/.local/share}/bemoji}` and uses `curl` to fetch Unicode emoji data on first use. For an offline rebuild, retain a local list or pass `-f /path/to/list.txt`; doctor only checks for cached lists and never fetches them.
+The emoji script defaults to the Wayland clipboard (`fuzzel`, `wl-copy`). Wayland typing additionally needs `wtype`; X11 clipboard/typing need `xclip`/`xdotool`. All three are absent in the snapshot and are **not** core desktop requirements. The picker stores lists under `${BEMOJI_DB_LOCATION:-${XDG_DATA_HOME:-$HOME/.local/share}/bemoji}` and uses `curl` to fetch Unicode emoji data on first use. For an offline rebuild, retain a local list or pass `-f /path/to/list.txt`; doctor only checks for cached lists and never fetches them.
 
 Engineering manifests list only locally installed, relevant tools: C/C++ builds, debugging, serial access, FPGA loading, SPIM, circuit simulation, MATLAB installer tooling, Pylon and Typst. They are examples for this user's coursework, not a universal course environment. Quartus/Nios II, MATLAB itself, PSoC tools and Basler camera support can require separate vendor installations, licenses, udev rules and target hardware. `matlab-mpm` is an installer, not proof MATLAB is installed. The recorded `QSYS_ROOTDIR` in old startup files pointed into a missing Paru build cache; never recreate that cache path as an installation strategy. Select the installed Quartus version and its `quartus/sopc_builder/bin` explicitly in a machine-local profile. ARM embedded compiler packages are not installed in this snapshot. Configure serial-device permissions and validate USB/JTAG access separately.
 
@@ -62,3 +62,5 @@ The diagnostic performs only local read queries and Python import checks, suppre
 ## Selected local settings
 
 Git enables an LFS filter, so `git-lfs` is included as an optional Git feature dependency; signed commits also require GnuPG and the user's existing private signing key, which is never deployed. The captured ckb-next autostart relies on a locally installed, unowned `/usr/bin/ckb-next` executable; reinstall that hardware app deliberately on another machine or omit the autostart entry. Generated Thunderbird/Evolution mail-handler associations were removed because their application executables are absent; choose an installed mail client locally. Optional MPD service enablement is documented in CAPTURE.md and is not enabled automatically.
+
+Fuzzel is the active desktop requirement; Tofi is optional fallback. `gsettings-desktop-schemas` supplies shared UI/document/monospace preferences. Run `python3 scripts/apply-ui-fonts.py --apply` after deployment to set these session values; previous values are saved under XDG state storage.
