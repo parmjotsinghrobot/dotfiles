@@ -8,7 +8,7 @@ text-color = #cdd6f4
 outline-width = 0
 border-width = 1
 border-color = #f5c2e7
-corner-radius = 10
+corner-radius = 0
 
 prompt-text = "> "
 prompt-color = #f5c2e7
@@ -30,21 +30,22 @@ alternate-result-background = #00000000
 selection-color = #1e1e2e
 selection-background = #f5c2e7
 selection-match-color = #45475a
-selection-background-padding = 4, -1
-selection-background-corner-radius = 4
+selection-background-padding = 4, 12
+selection-background-corner-radius = 0
 result-spacing = 8
 
-# Percentages adapt to each output; scale=true keeps text/padding logical.
+# Preserve the original square launcher; scale=true keeps dimensions logical.
 # Leave output unset so Sway chooses the focused output.
 anchor = center
-width = 60%
-height = 55%
+width = 640
+height = 640
 scale = true
 padding-top = 24
 padding-bottom = 24
 padding-left = 24
 padding-right = 24
-clip-to-padding = true
+# Let the highlight extend into the outer padding on both sides of its text.
+clip-to-padding = false
 num-results = 0
 
 # Preserve substring matching and normal stdin behaviour for cliphist/emoji.
