@@ -14,6 +14,7 @@
     ".config/dunst/dunstrc",
     ".config/environment.d/qt.conf",
     ".config/fontconfig/fonts.conf",
+    ".config/fuzzel/fuzzel.ini",
     ".config/git/config",
     ".config/gtk-3.0/gtk.css",
     ".config/gtk-3.0/settings.ini",

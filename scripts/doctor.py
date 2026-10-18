@@ -21,7 +21,8 @@ REQUIRED = {
     'antidot': 'antidot-bin', 'zsh': 'zsh', 'git': 'git', 'curl': 'curl',
     'fc-match': 'fontconfig', 'xdg-user-dir': 'xdg-user-dirs', 'gpgconf': 'gnupg',
 }
-OPTIONAL = {'checkupdates': 'pacman-contrib; optional update greeting',
+OPTIONAL = {'fuzzel': 'fuzzel; optional launcher/emoji trial',
+            'checkupdates': 'pacman-contrib; optional update greeting',
             'wtype': 'wtype; emoji typing on Wayland',
             'xclip': 'xclip; emoji clipboard on X11',
             'xdotool': 'xdotool; emoji typing on X11',

@@ -55,6 +55,10 @@ Edit managed files here after deployment. Some graphical settings tools, includi
 
 Theme policy and component coverage are in [THEME.md](docs/THEME.md). Machine-specific input/output and toolchain settings are described in [PORTABILITY.md](docs/PORTABILITY.md). Changes requiring a real desktop check remain listed in [the task list](docs/DOTFILES_TASKS.md).
 
+## Launcher comparison
+
+[Fuzzel trial and emoji history](docs/FUZZEL.md) describes the optional themed Fuzzel setup. Tofi stays on the existing bindings while comparing.
+
 ## Desktop basics
 
 Super+Space launches Tofi, Super+Q opens Kitty, Super+B opens the browser, Super+V opens clipboard history, and Super+F1 opens the emoji picker. Super+Shift+C reloads Sway. Super+Escape locks and suspends. Read the managed keybind config for the full list.

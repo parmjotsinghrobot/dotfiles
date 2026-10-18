@@ -14,7 +14,7 @@ DEFAULT_CMD=${BEMOJI_DEFAULT_CMD:-}
 CMDS=""
 
 # Picker command order
-PICKERS="tofi fuzzel bemenu wofi rofi dmenu ilia"
+PICKERS="${BEMOJI_PICKER:-tofi fuzzel bemenu wofi rofi dmenu ilia}"
 
 usage() {
     cat >&2 <<EOF
@@ -27,6 +27,7 @@ Options:
   -e, --echo          Output emoji only
   -n, --newline       Add newline after output
   -f FILE             Custom emoji file/URL
+  --picker NAME       Choose a picker, e.g. fuzzel or tofi
   -D TYPES            Download lists (all,emoji,math,nerd)
   -v, --version       Show version
   -h, --help          Show this help
@@ -98,7 +99,13 @@ picker_command() {
                 rofi) exec rofi -p 🔍 -i -dmenu ;;
                 dmenu) exec dmenu -p 🔍 -i -l 20 ;;
                 ilia) exec ilia -n -p textlist -l Emoji ;;
-                fuzzel) exec fuzzel -d -f 'monospace:size=14' -w 30 -l 10 -a bottom-right --x-margin 8 --y-margin 8 ;;
+                fuzzel)
+                    # Explicit --cache enables native usage sorting in dmenu mode.
+                    # Keep emoji selections separate from application history.
+                    emoji_cache="${BEMOJI_FUZZEL_CACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/bemoji/fuzzel-history}"
+                    (umask 077 && mkdir -p "$(dirname "$emoji_cache")") || exit 1
+                    exec fuzzel --dmenu --only-match --cache="$emoji_cache"
+                    ;;
                 tofi) exec tofi
             esac
         fi
@@ -133,7 +140,9 @@ handle_selection() {
         esac
     done
 
-    [ -z "$CMDS" ] && printf "%s" "$selection" | clipboard
+    if [ -z "$CMDS" ]; then
+        printf "%s" "$selection" | clipboard
+    fi
 }
 
 # Parse arguments
@@ -144,6 +153,14 @@ while [ $# -gt 0 ]; do
         -e|--echo) CMDS="$CMDS echo" ;;
         -n|--newline) ECHO_NEWLINE=true ;;
         -f|--file) BEMOJI_CUSTOM_LIST=$2; shift ;;
+        --picker)
+            [ $# -ge 2 ] || { msg "--picker requires a name"; usage 1; }
+            case $2 in
+                tofi|fuzzel|bemenu|wofi|rofi|dmenu|ilia) PICKERS=$2 ;;
+                *) msg "Unsupported picker: $2"; exit 1 ;;
+            esac
+            shift
+            ;;
         -D) BEMOJI_DOWNLOAD_LIST=$2; shift ;;
         -v|--version) version ;;
         -h|--help) usage 0 ;;
