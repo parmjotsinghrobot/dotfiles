@@ -15,7 +15,7 @@ effect-blur=30x4
 effect-vignette=0.5:0.5
 
 # flash black if the image hasnt loaded
-color=1e1e2e
+color=000000
 
 # font config
 font=Iosevka Curly
@@ -23,7 +23,7 @@ font-size=50
 
 # clock positioning (well status as well but ok)
 indicator-idle-visible
-indicator-thickness=3
+indicator-thickness=0
 indicator-x-position=150
 indicator-y-position=1000
 
@@ -33,31 +33,34 @@ text-clear-color=f9e2af
 text-ver-color=94e2d5
 text-wrong-color=f38ba8
 
-# make everything invis
-inside-color=1e1e2ecc
-inside-clear-color=1e1e2ecc
-inside-ver-color=1e1e2ecc
-inside-wrong-color=1e1e2ecc
+# Keep the original invisible ring/interior; only clock and status text show.
+inside-color=00000000
+inside-clear-color=00000000
+inside-ver-color=00000000
+inside-wrong-color=00000000
 
-key-hl-color=f5c2e7
+key-hl-color=00000000
 
-layout-bg-color=1e1e2ecc
-layout-text-color=cdd6f4
+layout-bg-color=00000000
+layout-text-color=cdd6f430
 
 line-color=00000000
 line-clear-color=00000000
 line-ver-color=00000000
 line-wrong-color=00000000
 
-ring-color=f5c2e7
-ring-clear-color=f9e2af
-ring-ver-color=94e2d5
-ring-wrong-color=f38ba8
+ring-color=00000000
+ring-clear-color=00000000
+ring-ver-color=00000000
+ring-wrong-color=00000000
 
-# Semantic caps-lock and backspace states; screenshot blur remains above.
+# Caps-lock keeps its text state without adding visible ring/highlight geometry.
 text-caps-lock-color=f9e2af
-ring-caps-lock-color=f9e2af
-inside-caps-lock-color=1e1e2ecc
-bs-hl-color=f38ba8
-caps-lock-key-hl-color=f9e2af
-caps-lock-bs-hl-color=f38ba8
+ring-caps-lock-color=00000000
+inside-caps-lock-color=00000000
+bs-hl-color=00000000
+caps-lock-key-hl-color=00000000
+caps-lock-bs-hl-color=00000000
+line-caps-lock-color=00000000
+separator-color=00000000
+layout-border-color=00000000

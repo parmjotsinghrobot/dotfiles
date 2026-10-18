@@ -31,7 +31,7 @@ Use Base text on a filled Pink selection. A highlighted match can use Pink on Ba
 - Cursor: **catppuccin-mocha-pink-cursors**, size **24**, in Sway, GTK, Xsettings and both user cursor defaults.
 - Logical DPI: **96**; GTK/Xsettings encode this as **98304** (96 × 1024). Use Sway per-output scaling for physical display size, recorded in the machine's output configuration. Avoid a second forced Fontconfig DPI such as 143.
 - Rendering: antialiasing on, slight hinting, no subpixel rendering. This avoids conflicting RGB assumptions across differently scaled outputs.
-- Use Kitty's **0.8 background opacity** as the reference: Mocha Base with `cc` alpha for Tofi, Swaybar and Dunst; supported Kvantum window/menu backgrounds reduce opacity by 20%. Keep text and controls opaque. GTK/libadwaita and application-rendered surfaces may need opaque backgrounds; do not fade whole windows to force the effect. Swaylock retains its blurred screenshot with translucent indicator surfaces because its native effects do not provide a full-screen Mocha tint. Check all transparency over bright and dark wallpaper. Blur is a compositor effect, not a replacement for contrast.
+- Use Kitty's **0.8 background opacity** as the reference: Mocha Base with `cc` alpha for Tofi, Swaybar and Dunst; supported Kvantum window/menu backgrounds reduce opacity by 20%. Keep text and controls opaque. GTK/libadwaita and application-rendered surfaces may need opaque backgrounds; do not fade whole windows to force the effect. Swaylock retains its blurred screenshot, visible clock/status text and intentionally invisible ring/interior/highlights; its native effects do not provide a full-screen Mocha tint. Check all transparency over bright and dark wallpaper. Blur is a compositor effect, not a replacement for contrast.
 
 Iosevka Curly resolves to its installed family. Generic font selection was checked with `fc-match`; explicit icon families and emoji fallback are preserved. Application-specific named fonts can still override generic choices.
 
@@ -68,7 +68,7 @@ Paths below are relative to `$HOME`; managed copies live under the repo's `home/
 | Fontconfig | `.config/fontconfig/fonts.conf` | 96 logical DPI policy, slight hinting, grayscale antialiasing; no conflicting forced DPI |
 | Kitty | `.config/kitty/kitty.conf`, `current-theme.conf` | Pink selection/cursor/active tab/border, preserved ANSI palette, 10 pt, opacity 0.8 |
 | Dunst | `.config/dunst/dunstrc` | Mocha surfaces/Text; Pink normal accent, Red critical; inspect short/long notifications |
-| Swaylock | `.config/swaylock/config` | Mocha/Pink idle, Teal verifying, Red failure, Yellow warning; check actual lock interaction |
+| Swaylock | `.config/swaylock/config` | Invisible ring/interior; Mocha Text clock, Teal verifying, Red failure, Yellow warning; check actual lock interaction |
 | Micro | `.config/micro/settings.json`, selected colour scheme | Preserve syntax/diff semantics and Pink UI accent |
 | Btop/Cava | Selected `.config/btop/btop.conf` and theme; `.config/cava/config` | Mocha backgrounds, Pink primary accent, semantic alerts; inspect terminal rendering |
 | Browser/editor/chat/music | Selected theme preferences or extension list only | Later application pass: Mocha Pink where supported; document any app limitation |
