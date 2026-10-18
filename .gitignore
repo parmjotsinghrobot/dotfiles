@@ -1,0 +1,38 @@
+# Generated files, local deployment/recovery state, and editor backups
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.swp
+*.swo
+*~
+*.bak
+.DS_Store
+.deploy-state/
+local/
+backups/
+# Shell runtime state
+.zcompdump*
+.zsh_history
+.bash_history
+.lesshst
+.python_history
+# Never import application runtime data or credentials
+home/.cache/
+home/.local/state/
+home/.local/share/keyrings/
+home/.ssh/
+home/.gnupg/
+home/.aws/
+home/.config/discord/
+home/.config/chromium/
+home/.config/google-chrome/
+home/.config/zen/
+home/.mozilla/
+*.sqlite
+*.sqlite3
+*.db
+*.log
+
+# Untracked trusted local machine additions
+home/.config/shell/*.local.sh
+home/.config/sway/machines/local.conf

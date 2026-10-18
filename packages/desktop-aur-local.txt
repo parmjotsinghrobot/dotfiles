@@ -1,0 +1,6 @@
+# One package per line. Snapshot: 2026-10-18. See docs/DEPENDENCIES.md.
+antidot-bin
+swayfx
+swaylock-effects-git
+tofi
+zen-browser-bin

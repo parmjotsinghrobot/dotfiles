@@ -1,0 +1,6 @@
+# One package per line. Snapshot: 2026-10-18. See docs/DEPENDENCIES.md.
+catppuccin-cursors-mocha
+catppuccin-gtk-theme-mocha
+kvantum-theme-catppuccin-git
+papirus-folders-catppuccin-git
+ttf-font-awesome-5

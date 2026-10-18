@@ -1,0 +1,10 @@
+# One package per line. Snapshot: 2026-10-18. See docs/DEPENDENCIES.md.
+bluez-utils
+btop
+cava
+jq
+nwg-look
+pacman-contrib
+pavucontrol
+thunar
+git-lfs

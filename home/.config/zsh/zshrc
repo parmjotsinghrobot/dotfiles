@@ -1,0 +1,74 @@
+# Keep interactive startup offline. Network checks are explicit commands below.
+[[ -o interactive ]] || return
+: ${XDG_CONFIG_HOME:=$HOME/.config}
+: ${XDG_CACHE_HOME:=$HOME/.cache}
+: ${XDG_DATA_HOME:=$HOME/.local/share}
+# Load by real path: the deployed entry point can be a symlink into the repo.
+typeset _zsh_config_dir=${${(%):-%N}:A:h}
+typeset _zsh_cache="$XDG_CACHE_HOME/zsh"
+mkdir -p -- "$_zsh_cache"
+
+weather() { command curl --fail --silent --show-error --max-time 2 'https://wttr.in/?0'; }
+dotfiles-refresh-updates() {
+    command -v checkupdates >/dev/null || return 127
+    local result update_status
+    result=$(command checkupdates 2>/dev/null); update_status=$?
+    # checkupdates exits 2 when there are no available updates.
+    (( update_status == 0 || update_status == 2 )) || return "$update_status"
+    local -a updates
+    updates=("${(@f)result}")
+    [[ -n $result ]] || updates=()
+    print -r -- ${#updates} >| "$XDG_CACHE_HOME/zsh/updates"
+}
+if [[ ${DOTFILES_GREETING:-0} == 1 ]]; then
+    print -P '%F{magenta}Welcome back.%f'
+    if [[ -r "$_zsh_cache/updates" ]]; then
+        typeset _cached_updates=$(<"$_zsh_cache/updates")
+        [[ $_cached_updates == <-> ]] && print -r -- "$_cached_updates package updates available (cached)"
+        unset _cached_updates
+    fi
+fi
+# Optional tool: leave it out when unavailable.
+if (( $+commands[antidot] )); then
+    eval "$(antidot init)"
+fi
+
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+autoload -Uz compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+compinit -d "$_zsh_cache/zcompdump-$ZSH_VERSION"
+autoload -Uz promptinit colors
+promptinit
+colors
+HISTFILE="$_zsh_cache/history"
+HISTSIZE=1000000
+SAVEHIST=1000000
+setopt HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS
+
+# Source the actual plugin files; each plugin resolves its own companion files.
+[[ ! -r "$_zsh_config_dir/plugins/omz-lib/git.zsh" ]] || source "$_zsh_config_dir/plugins/omz-lib/git.zsh"
+if [[ -r "$_zsh_config_dir/themes/passion/passion.zsh-theme" ]]; then
+    source "$_zsh_config_dir/themes/passion/passion.zsh-theme"
+else
+    PROMPT='%F{magenta}%n@%m%f %~ %# '
+fi
+[[ ! -r "$_zsh_config_dir/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] || source "$_zsh_config_dir/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+alias peaclock='peaclock --config-dir "$XDG_CONFIG_HOME/peaclock"'
+alias fix-bug="printf 'Bug fixed. \nNo reboot needed.\n'"
+export CHROOT="$HOME/AUR/CHROOT"
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias ip='ip -color=auto'
+export LESS='-R --use-color -Dd+r$Du+b$'
+export MANPAGER='less -R --use-color -Dd+r -Du+b'
+# gpg-agent is socket activated. No eager agent launch for every shell.
+[[ ! -t 0 ]] || export GPG_TTY=$(tty)
+[[ ! -r "$XDG_CONFIG_HOME/shell/interactive.local.sh" ]] || source "$XDG_CONFIG_HOME/shell/interactive.local.sh"
+# Keep syntax highlighting last so it sees all registered widgets.
+[[ ! -r "$_zsh_config_dir/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] || source "$_zsh_config_dir/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+unset _zsh_config_dir _zsh_cache

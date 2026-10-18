@@ -1,0 +1,5 @@
+# One package per line. Snapshot: 2026-10-18. See docs/DEPENDENCIES.md.
+ltspice
+matlab-mpm
+pylon
+spim-svn

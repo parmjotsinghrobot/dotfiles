@@ -1,0 +1,10 @@
+# One package per line. Snapshot: 2026-10-18. See docs/DEPENDENCIES.md.
+cmake
+gcc
+gdb
+make
+minicom
+ngspice
+openfpgaloader
+python-pyserial
+typst

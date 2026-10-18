@@ -1,0 +1,7 @@
+include /etc/sway/config.d/*
+include config.d/*
+
+# Explicit current machine profile. Choose another file or omit on a new machine.
+include machines/hp-envy.conf
+# Optional untracked workstation overrides, loaded last.
+include machines/local.conf

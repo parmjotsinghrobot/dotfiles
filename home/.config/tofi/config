@@ -1,0 +1,53 @@
+# Catppuccin Mocha Pink; background alpha matches Kitty's 0.8 opacity.
+# Keep foregrounds opaque so the wallpaper does not wash out labels.
+font = Iosevka Curly
+font-size = 14
+
+background-color = #1e1e2ecc
+text-color = #cdd6f4
+outline-width = 0
+border-width = 1
+border-color = #f5c2e7
+corner-radius = 10
+
+prompt-text = "> "
+prompt-color = #f5c2e7
+prompt-background = #00000000
+placeholder-text = "What we doing today?"
+placeholder-color = #a6adc8
+placeholder-background = #00000000
+input-color = #cdd6f4
+input-background = #00000000
+
+text-cursor = true
+text-cursor-color = #f5c2e7
+text-cursor-corner-radius = 2
+
+default-result-color = #cdd6f4
+default-result-background = #00000000
+alternate-result-color = #cdd6f4
+alternate-result-background = #00000000
+selection-color = #1e1e2e
+selection-background = #f5c2e7
+selection-match-color = #45475a
+selection-background-padding = 4, -1
+selection-background-corner-radius = 4
+result-spacing = 8
+
+# Percentages adapt to each output; scale=true keeps text/padding logical.
+# Leave output unset so Sway chooses the focused output.
+anchor = center
+width = 60%
+height = 55%
+scale = true
+padding-top = 24
+padding-bottom = 24
+padding-left = 24
+padding-right = 24
+clip-to-padding = true
+num-results = 0
+
+# Preserve substring matching and normal stdin behaviour for cliphist/emoji.
+fuzzy-match = false
+require-match = true
+auto-accept-single = false

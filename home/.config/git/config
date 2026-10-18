@@ -1,0 +1,44 @@
+[user]
+	email = parmjotsinghrobot@gmail.com
+	name = parmjotsinghrobot
+	signingkey = 3C5535C4BA96444F
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[safe]
+	directory = /opt/flutter
+[commit]
+	gpgsign = true
+[pull]
+	rebase = true
+[rerere]
+	enabled = true
+[rebase]
+	autoStash = true
+[fetch]
+	prune = true
+[push]
+	default = current
+	autoSetupRemote = true
+[init]
+	defaultBranch = main
+[branch]
+	autoSetupRebase = always
+[merge]
+	conflictStyle = zdiff3
+	renameLimit = 999999
+[status]
+	branch = true
+[alias]
+	lg = log --oneline --graph --decorate --all
+	wdiff = diff --word-diff=color
+[log]
+	showSignature = false
+[format]
+	pretty = %C(auto)%h %d %s %C(black)%C(bold)%cr
+[help]
+	autocorrect = 1
+[core]
+	editor = micro

@@ -1,0 +1,63 @@
+ignore-empty-password
+daemonize
+
+# fade in the blur over 2 seconds, and have a grace of 1 second
+fade-in=2
+grace=1
+
+# enable the indicator and the clock
+indicator
+clock
+
+# use the last open screen as the wallpaper and run effects
+screenshots
+effect-blur=30x4
+effect-vignette=0.5:0.5
+
+# flash black if the image hasnt loaded
+color=1e1e2e
+
+# font config
+font=Iosevka Curly
+font-size=50
+
+# clock positioning (well status as well but ok)
+indicator-idle-visible
+indicator-thickness=3
+indicator-x-position=150
+indicator-y-position=1000
+
+# yes.
+text-color=cdd6f4
+text-clear-color=f9e2af
+text-ver-color=94e2d5
+text-wrong-color=f38ba8
+
+# make everything invis
+inside-color=1e1e2ecc
+inside-clear-color=1e1e2ecc
+inside-ver-color=1e1e2ecc
+inside-wrong-color=1e1e2ecc
+
+key-hl-color=f5c2e7
+
+layout-bg-color=1e1e2ecc
+layout-text-color=cdd6f4
+
+line-color=00000000
+line-clear-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+
+ring-color=f5c2e7
+ring-clear-color=f9e2af
+ring-ver-color=94e2d5
+ring-wrong-color=f38ba8
+
+# Semantic caps-lock and backspace states; screenshot blur remains above.
+text-caps-lock-color=f9e2af
+ring-caps-lock-color=f9e2af
+inside-caps-lock-color=1e1e2ecc
+bs-hl-color=f38ba8
+caps-lock-key-hl-color=f9e2af
+caps-lock-bs-hl-color=f38ba8

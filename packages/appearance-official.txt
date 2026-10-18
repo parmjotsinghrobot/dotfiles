@@ -1,0 +1,11 @@
+# One package per line. Snapshot: 2026-10-18. See docs/DEPENDENCIES.md.
+kvantum
+kvantum-qt5
+noto-fonts
+noto-fonts-emoji
+papirus-icon-theme
+qt5ct
+qt6ct
+ttc-iosevka-curly
+ttf-nerd-fonts-symbols
+ttf-nerd-fonts-symbols-mono

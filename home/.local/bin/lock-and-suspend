@@ -1,0 +1,7 @@
+#!/bin/sh
+# swaylock -f returns only after the compositor has confirmed the lock.
+# The installed swaylock-effects supports -f, but does not have --ready-fd.
+# Disable grace: a resume must always require authentication.
+set -eu
+swaylock --daemonize --grace 0
+exec systemctl suspend

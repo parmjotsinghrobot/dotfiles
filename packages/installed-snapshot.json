@@ -1,0 +1,545 @@
+{
+  "recorded_date": "2026-10-18",
+  "method": "pacman -Q, -Qm, -Qi (local databases only); aur-local means foreign, not independently verified AUR provenance",
+  "packages": [
+    {
+      "category": "desktop",
+      "package": "alsa-utils",
+      "installed_version": "1.2.16-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://www.alsa-project.org"
+    },
+    {
+      "category": "desktop",
+      "package": "autotiling",
+      "installed_version": "1.9.4-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/nwg-piotr/autotiling"
+    },
+    {
+      "category": "desktop",
+      "package": "bluez",
+      "installed_version": "5.87-2",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "http://www.bluez.org/"
+    },
+    {
+      "category": "desktop",
+      "package": "brightnessctl",
+      "installed_version": "0.5.1-3",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/Hummer12007/brightnessctl"
+    },
+    {
+      "category": "desktop",
+      "package": "cliphist",
+      "installed_version": "1:0.7.0-2",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/sentriz/cliphist"
+    },
+    {
+      "category": "desktop",
+      "package": "curl",
+      "installed_version": "8.22.0-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://curl.se/"
+    },
+    {
+      "category": "desktop",
+      "package": "dunst",
+      "installed_version": "1.13.2-3",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://dunst-project.org/"
+    },
+    {
+      "category": "desktop",
+      "package": "fontconfig",
+      "installed_version": "2:2.18.3-2",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://www.freedesktop.org/wiki/Software/fontconfig/"
+    },
+    {
+      "category": "desktop",
+      "package": "git",
+      "installed_version": "2.56.0-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://git-scm.com/"
+    },
+    {
+      "category": "desktop",
+      "package": "gnupg",
+      "installed_version": "2.4.9-3",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://www.gnupg.org/"
+    },
+    {
+      "category": "desktop",
+      "package": "grim",
+      "installed_version": "1.5.0-2",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://gitlab.freedesktop.org/emersion/grim"
+    },
+    {
+      "category": "desktop",
+      "package": "kitty",
+      "installed_version": "0.49.2-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/kovidgoyal/kitty"
+    },
+    {
+      "category": "desktop",
+      "package": "less",
+      "installed_version": "1:710-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://www.greenwoodsoftware.com/less/"
+    },
+    {
+      "category": "desktop",
+      "package": "micro",
+      "installed_version": "2.0.15-3",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://micro-editor.github.io/"
+    },
+    {
+      "category": "desktop",
+      "package": "network-manager-applet",
+      "installed_version": "1.36.0-2",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://gitlab.gnome.org/GNOME/network-manager-applet"
+    },
+    {
+      "category": "desktop",
+      "package": "networkmanager",
+      "installed_version": "1.58.1-2",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://networkmanager.dev/"
+    },
+    {
+      "category": "desktop",
+      "package": "pango",
+      "installed_version": "1:1.58.2-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://www.pango.org/"
+    },
+    {
+      "category": "desktop",
+      "package": "pipewire",
+      "installed_version": "1:1.6.9-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://pipewire.org"
+    },
+    {
+      "category": "desktop",
+      "package": "pipewire-alsa",
+      "installed_version": "1:1.6.9-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://pipewire.org"
+    },
+    {
+      "category": "desktop",
+      "package": "pipewire-pulse",
+      "installed_version": "1:1.6.9-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://pipewire.org"
+    },
+    {
+      "category": "desktop",
+      "package": "playerctl",
+      "installed_version": "2.4.1-5",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/altdesktop/playerctl"
+    },
+    {
+      "category": "desktop",
+      "package": "python",
+      "installed_version": "3.14.8-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://www.python.org/"
+    },
+    {
+      "category": "desktop",
+      "package": "python-gobject",
+      "installed_version": "3.58.1-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://pygobject.gnome.org/"
+    },
+    {
+      "category": "desktop",
+      "package": "python-i3ipc",
+      "installed_version": "2.2.1-9",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/altdesktop/i3ipc-python"
+    },
+    {
+      "category": "desktop",
+      "package": "slurp",
+      "installed_version": "1.5.0-2",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/emersion/slurp"
+    },
+    {
+      "category": "desktop",
+      "package": "swaybg",
+      "installed_version": "1.2.2-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/swaywm/swaybg"
+    },
+    {
+      "category": "desktop",
+      "package": "swayidle",
+      "installed_version": "1.9.0-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/swaywm/swayidle"
+    },
+    {
+      "category": "desktop",
+      "package": "udiskie",
+      "installed_version": "2.7.0-2",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://pypi.python.org/pypi/udiskie"
+    },
+    {
+      "category": "desktop",
+      "package": "wireplumber",
+      "installed_version": "0.5.18-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://pipewire.pages.freedesktop.org/wireplumber/"
+    },
+    {
+      "category": "desktop",
+      "package": "wl-clipboard",
+      "installed_version": "1:2.3.0-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/bugaevc/wl-clipboard"
+    },
+    {
+      "category": "desktop",
+      "package": "xdg-desktop-portal-gtk",
+      "installed_version": "1.15.3-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/flatpak/xdg-desktop-portal-gtk"
+    },
+    {
+      "category": "desktop",
+      "package": "xdg-desktop-portal-wlr",
+      "installed_version": "0.8.4-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/emersion/xdg-desktop-portal-wlr"
+    },
+    {
+      "category": "desktop",
+      "package": "xdg-user-dirs",
+      "installed_version": "0.20-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://www.freedesktop.org/wiki/Software/xdg-user-dirs"
+    },
+    {
+      "category": "desktop",
+      "package": "xdg-utils",
+      "installed_version": "1.2.1-2",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://gitlab.freedesktop.org/xdg/xdg-utils"
+    },
+    {
+      "category": "desktop",
+      "package": "xorg-xwayland",
+      "installed_version": "24.1.14-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://xorg.freedesktop.org"
+    },
+    {
+      "category": "desktop",
+      "package": "zsh",
+      "installed_version": "5.9.2-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://www.zsh.org/"
+    },
+    {
+      "category": "desktop",
+      "package": "antidot-bin",
+      "installed_version": "0.6.3-1",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://github.com/doron-cohen/antidot"
+    },
+    {
+      "category": "desktop",
+      "package": "swayfx",
+      "installed_version": "0.6-0",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://github.com/WillPower3309/swayfx"
+    },
+    {
+      "category": "desktop",
+      "package": "swaylock-effects-git",
+      "installed_version": "r470.496059a-1",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://github.com/jirutka/swaylock-effects"
+    },
+    {
+      "category": "desktop",
+      "package": "tofi",
+      "installed_version": "0.9.1-2",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://github.com/philj56/tofi"
+    },
+    {
+      "category": "desktop",
+      "package": "zen-browser-bin",
+      "installed_version": "1.23.2b-1",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://github.com/zen-browser/desktop"
+    },
+    {
+      "category": "optional",
+      "package": "bluez-utils",
+      "installed_version": "5.87-2",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "http://www.bluez.org/"
+    },
+    {
+      "category": "optional",
+      "package": "btop",
+      "installed_version": "1.4.7-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/aristocratos/btop"
+    },
+    {
+      "category": "optional",
+      "package": "cava",
+      "installed_version": "1.0.0-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/karlstav/cava"
+    },
+    {
+      "category": "optional",
+      "package": "jq",
+      "installed_version": "1.8.2-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://jqlang.github.io/jq/"
+    },
+    {
+      "category": "optional",
+      "package": "nwg-look",
+      "installed_version": "1.1.2-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/nwg-piotr/nwg-look"
+    },
+    {
+      "category": "optional",
+      "package": "pacman-contrib",
+      "installed_version": "1.13.1-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://gitlab.archlinux.org/pacman/pacman-contrib"
+    },
+    {
+      "category": "optional",
+      "package": "pavucontrol",
+      "installed_version": "1:6.2-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://freedesktop.org/software/pulseaudio/pavucontrol/"
+    },
+    {
+      "category": "optional",
+      "package": "thunar",
+      "installed_version": "4.20.10-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://docs.xfce.org/xfce/thunar/start"
+    },
+    {
+      "category": "optional",
+      "package": "peaclock",
+      "installed_version": "0.4.3-2",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://github.com/octobanana/peaclock"
+    },
+    {
+      "category": "appearance",
+      "package": "kvantum",
+      "installed_version": "1.1.8-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/tsujan/Kvantum"
+    },
+    {
+      "category": "appearance",
+      "package": "noto-fonts",
+      "installed_version": "1:2026.10.01-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://fonts.google.com/noto"
+    },
+    {
+      "category": "appearance",
+      "package": "noto-fonts-emoji",
+      "installed_version": "1:2.051-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://www.google.com/get/noto/"
+    },
+    {
+      "category": "appearance",
+      "package": "papirus-icon-theme",
+      "installed_version": "20260801-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/PapirusDevelopmentTeam/papirus-icon-theme"
+    },
+    {
+      "category": "appearance",
+      "package": "qt5ct",
+      "installed_version": "1.9-2",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://qt5ct.sourceforge.io/"
+    },
+    {
+      "category": "appearance",
+      "package": "qt6ct",
+      "installed_version": "0.11-9",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://www.opencode.net/trialuser/qt6ct"
+    },
+    {
+      "category": "appearance",
+      "package": "ttc-iosevka-curly",
+      "installed_version": "34.8.1-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://typeof.net/Iosevka/"
+    },
+    {
+      "category": "appearance",
+      "package": "ttf-nerd-fonts-symbols",
+      "installed_version": "3.5.1-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/ryanoasis/nerd-fonts"
+    },
+    {
+      "category": "appearance",
+      "package": "ttf-nerd-fonts-symbols-mono",
+      "installed_version": "3.5.1-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/ryanoasis/nerd-fonts"
+    },
+    {
+      "category": "appearance",
+      "package": "catppuccin-cursors-mocha",
+      "installed_version": "2.0.0-1",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://github.com/catppuccin/cursors"
+    },
+    {
+      "category": "appearance",
+      "package": "catppuccin-gtk-theme-mocha",
+      "installed_version": "1.0.3-1",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://github.com/catppuccin/gtk"
+    },
+    {
+      "category": "appearance",
+      "package": "kvantum-theme-catppuccin-git",
+      "installed_version": "r21.71105d2-1",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://github.com/catppuccin/Kvantum"
+    },
+    {
+      "category": "appearance",
+      "package": "papirus-folders-catppuccin-git",
+      "installed_version": "r30.f83671d1-2",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://github.com/catppuccin/papirus-folders"
+    },
+    {
+      "category": "appearance",
+      "package": "ttf-font-awesome-5",
+      "installed_version": "5.15.4-1",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://fontawesome.com/"
+    },
+    {
+      "category": "engineering",
+      "package": "cmake",
+      "installed_version": "4.4.4-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://www.cmake.org/"
+    },
+    {
+      "category": "engineering",
+      "package": "gcc",
+      "installed_version": "16.2.1+r23+gd564253eb6c8-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://gcc.gnu.org"
+    },
+    {
+      "category": "engineering",
+      "package": "gdb",
+      "installed_version": "18.1-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://www.gnu.org/software/gdb/"
+    },
+    {
+      "category": "engineering",
+      "package": "make",
+      "installed_version": "4.4.1-3",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://www.gnu.org/software/make"
+    },
+    {
+      "category": "engineering",
+      "package": "minicom",
+      "installed_version": "2.11.1-3",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://salsa.debian.org/minicom-team/minicom"
+    },
+    {
+      "category": "engineering",
+      "package": "ngspice",
+      "installed_version": "47-1",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://ngspice.sourceforge.net"
+    },
+    {
+      "category": "engineering",
+      "package": "openfpgaloader",
+      "installed_version": "1.1.1-2",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/trabucayre/openFPGALoader"
+    },
+    {
+      "category": "engineering",
+      "package": "python-pyserial",
+      "installed_version": "3.5-8",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://github.com/pyserial/pyserial"
+    },
+    {
+      "category": "engineering",
+      "package": "typst",
+      "installed_version": "1:0.15.1-2",
+      "local_classification": "official",
+      "upstream_url_from_installed_metadata": "https://typst.app"
+    },
+    {
+      "category": "engineering",
+      "package": "ltspice",
+      "installed_version": "26.0.2.1-1",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://www.analog.com/en/resources/design-tools-and-calculators/ltspice-simulator.html"
+    },
+    {
+      "category": "engineering",
+      "package": "matlab-mpm",
+      "installed_version": "1:2026.7.1+r161.gdd2f09b-1",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://www.mathworks.com/products/mpm.html"
+    },
+    {
+      "category": "engineering",
+      "package": "pylon",
+      "installed_version": "8.0.2.16314-1",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://www.baslerweb.com/en/downloads/software-downloads/#os=linuxx8664bit;type=pylonsoftware"
+    },
+    {
+      "category": "engineering",
+      "package": "spim-svn",
+      "installed_version": "764-1",
+      "local_classification": "aur-local",
+      "upstream_url_from_installed_metadata": "https://spimsimulator.sourceforge.net/"
+    }
+  ]
+}

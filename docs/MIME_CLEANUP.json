@@ -1,0 +1,507 @@
+[
+  {
+    "section": "Default Applications",
+    "mime": "image/jpeg",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/bmp",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/gif",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/jpg",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/pjpeg",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/png",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/tiff",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/webp",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/x-bmp",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/x-gray",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/x-icb",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/x-ico",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/x-png",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/x-portable-anymap",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/x-portable-bitmap",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/x-portable-graymap",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/x-portable-pixmap",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/x-xbitmap",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/x-xpixmap",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/x-pcx",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/svg+xml",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/svg+xml-compressed",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/vnd.wap.wbmp",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "image/x-icns",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "x-scheme-handler/gitkraken",
+    "removed": [
+      "GitKraken.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "application/x-raw-disk-image",
+    "removed": [
+      "org.kde.ark.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "video/mp4",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "x-scheme-handler/discord-1216669957799018608",
+    "removed": [
+      "discord-1216669957799018608.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "x-scheme-handler/figma",
+    "removed": [
+      "figma-linux.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "x-scheme-handler/lunarclient",
+    "removed": [
+      "lunarclient.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "x-scheme-handler/discord-562286213059444737",
+    "removed": [
+      "lunarclient.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "x-scheme-handler/antigravity",
+    "removed": [
+      "antigravity.desktop"
+    ]
+  },
+  {
+    "section": "Default Applications",
+    "mime": "application/octet-stream",
+    "removed": [
+      "chromium.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/bmp",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/gif",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/jpg",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/pjpeg",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/png",
+    "removed": [
+      "firefox.desktop",
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/tiff",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/webp",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/x-bmp",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/x-gray",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/x-icb",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/x-ico",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/x-png",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/x-portable-anymap",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/x-portable-bitmap",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/x-portable-graymap",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/x-portable-pixmap",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/x-xbitmap",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/x-xpixmap",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/x-pcx",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/svg+xml",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/svg+xml-compressed",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/vnd.wap.wbmp",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/x-icns",
+    "removed": [
+      "org.gnome.eog.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "image/jpeg",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "application/pdf",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "application/x-raw-disk-image",
+    "removed": [
+      "org.kde.ark.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "text/x-log",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "video/mp4",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "x-scheme-handler/http",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "x-scheme-handler/https",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "x-scheme-handler/chrome",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "text/html",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "application/x-extension-htm",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "application/x-extension-html",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "application/x-extension-shtml",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "application/xhtml+xml",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "application/x-extension-xhtml",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "application/x-extension-xht",
+    "removed": [
+      "firefox.desktop"
+    ]
+  },
+  {
+    "section": "Added Associations",
+    "mime": "application/octet-stream",
+    "removed": [
+      "chromium.desktop"
+    ]
+  }
+]

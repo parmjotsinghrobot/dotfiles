@@ -1,0 +1,79 @@
+{
+  "name": "Catppuccin Mocha Pink",
+  "flavour": "mocha",
+  "accent": "pink",
+  "colors": {
+    "base": "#1e1e2e",
+    "mantle": "#181825",
+    "crust": "#11111b",
+    "surface0": "#313244",
+    "surface1": "#45475a",
+    "surface2": "#585b70",
+    "overlay0": "#6c7086",
+    "text": "#cdd6f4",
+    "subtext0": "#a6adc8",
+    "pink": "#f5c2e7",
+    "red": "#f38ba8",
+    "yellow": "#f9e2af",
+    "green": "#a6e3a1",
+    "blue": "#89b4fa",
+    "teal": "#94e2d5",
+    "peach": "#fab387",
+    "mauve": "#cba6f7"
+  },
+  "roles": {
+    "background": "base",
+    "background_recessed": "mantle",
+    "background_raised": "surface0",
+    "foreground": "text",
+    "foreground_secondary": "subtext0",
+    "accent": "pink",
+    "selection_background": "pink",
+    "selection_foreground": "base",
+    "border_inactive": "surface1",
+    "error": "red",
+    "warning": "yellow",
+    "success": "green",
+    "information": "blue",
+    "verification": "teal"
+  },
+  "fonts": {
+    "ui": {
+      "family": "Noto Sans",
+      "size_pt": 10
+    },
+    "monospace": {
+      "family": "Iosevka Curly",
+      "size_pt": 10
+    },
+    "launcher": {
+      "family": "Iosevka Curly",
+      "size_pt": 14
+    },
+    "bar": {
+      "family": "Iosevka Curly",
+      "size_pt": 9
+    }
+  },
+  "assets": {
+    "gtk": "catppuccin-mocha-pink-standard+default",
+    "icons": "Papirus-Dark",
+    "cursor": "catppuccin-mocha-pink-cursors",
+    "cursor_size": 24
+  },
+  "rendering": {
+    "logical_dpi": 96,
+    "antialias": true,
+    "hinting": "slight",
+    "subpixel": "none",
+    "scaling_owner": "Sway per-output scale"
+  },
+  "opacity": {
+    "supported_background": 0.8,
+    "opaque_fallback": 1.0,
+    "kitty_background": 0.8,
+    "swaybar_background_hex_alpha": "cc",
+    "text": 1.0,
+    "whole_window_opacity": 1.0
+  }
+}
