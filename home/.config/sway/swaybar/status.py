@@ -123,8 +123,10 @@ def battery():
 
 def clock():
     now = datetime.datetime.now().astimezone()
-    return [block("clock", now.strftime("%H:%M")),
-            block("date", now.strftime("%a %d/%m"))]
+    date = block("date", now.strftime("%a %d/%m"))
+    # The date is next to the tray; use a smaller gap here.
+    date["separator_block_width"] = 6
+    return [block("clock", now.strftime("%H:%M")), date]
 
 
 MODULES = [("mpris", media, 5), ("bluetooth", bluetooth, 20),
