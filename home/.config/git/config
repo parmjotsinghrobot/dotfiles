@@ -2,11 +2,6 @@
 	email = parmjotsinghrobot@gmail.com
 	name = parmjotsinghrobot
 	signingkey = 3C5535C4BA96444F
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
 [safe]
 	directory = /opt/flutter
 [commit]

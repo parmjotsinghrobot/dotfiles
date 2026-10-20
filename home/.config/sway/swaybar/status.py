@@ -112,12 +112,10 @@ def battery():
     device = devices[0]
     capacity = int((device / "capacity").read_text())
     status = (device / "status").read_text().strip()
-    plugged = any((p / "online").exists() and (p / "online").read_text().strip() == "1"
-                  for p in device.parent.glob("*"))
     icon = ["", "", "", "", ""][min(4, capacity * 5 // 100)]
     if status == "Charging":
-        icon = ""
-    elif status == "Full" or plugged:
+        icon = ""
+    elif status == "Full":
         icon = ""
     value = "FULL" if status == "Full" else f"{capacity}%"
     return [block("battery", f"{icon} {value}")]
