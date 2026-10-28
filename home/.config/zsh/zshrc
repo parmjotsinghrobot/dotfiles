@@ -33,11 +33,51 @@ if (( $+commands[antidot] )); then
     eval "$(antidot init)"
 fi
 
+# Keep editing mode consistent even when EDITOR/VISUAL is vim.
+bindkey -e
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
+# Normal/application cursor modes and common Home/End variants.
+bindkey '^[[C' forward-char
+bindkey '^[[D' backward-char
+bindkey '^[OA' up-line-or-beginning-search
+bindkey '^[OB' down-line-or-beginning-search
+bindkey '^[OC' forward-char
+bindkey '^[OD' backward-char
+bindkey '^[[H' beginning-of-line
+bindkey '^[OH' beginning-of-line
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[7~' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[OF' end-of-line
+bindkey '^[[4~' end-of-line
+bindkey '^[[8~' end-of-line
+bindkey '^[[3~' delete-char
+bindkey '^[[2~' overwrite-mode
+bindkey '^[[5~' up-line-or-history
+bindkey '^[[6~' down-line-or-history
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5H' beginning-of-buffer-or-history
+bindkey '^[[1;5F' end-of-buffer-or-history
+bindkey '^[[3;5~' kill-word
+bindkey '^H' backward-delete-char
+bindkey '^?' backward-delete-char
+if zmodload zsh/terminfo 2>/dev/null; then
+    typeset _key_cap _key_widget
+    for _key_cap _key_widget in \
+        khome beginning-of-line kend end-of-line \
+        kdch1 delete-char kich1 overwrite-mode \
+        kcuu1 up-line-or-beginning-search kcud1 down-line-or-beginning-search \
+        kcub1 backward-char kcuf1 forward-char \
+        kpp up-line-or-history knp down-line-or-history; do
+        [[ -z ${terminfo[$_key_cap]} ]] || bindkey "${terminfo[$_key_cap]}" "$_key_widget"
+    done
+    unset _key_cap _key_widget
+fi
 autoload -Uz compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 compinit -d "$_zsh_cache/zcompdump-$ZSH_VERSION"
@@ -56,6 +96,10 @@ if [[ -r "$_zsh_config_dir/themes/passion/passion.zsh-theme" ]]; then
 else
     PROMPT='%F{magenta}%n@%m%f %~ %# '
 fi
+# Passion's one-second alarm calls zle reset-prompt, which can re-enter the
+# renderer during editing/completion. Update the clock on each new prompt.
+TMOUT=0
+unfunction TRAPALRM 2>/dev/null
 [[ ! -r "$_zsh_config_dir/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] || source "$_zsh_config_dir/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 alias peaclock='peaclock --config-dir "$XDG_CONFIG_HOME/peaclock"'
