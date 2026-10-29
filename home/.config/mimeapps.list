@@ -17,6 +17,13 @@ video/quicktime=zen.desktop
 audio/mpeg=zen.desktop
 x-scheme-handler/codex=chatgpt.desktop
 
+text/csv=dev.zed.Zed.desktop
+text/tab-separated-values=dev.zed.Zed.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
+application/vnd.openxmlformats-officedocument.presentationml.presentation=libreoffice-impress.desktop
+application/vnd.ms-excel=libreoffice-calc.desktop
+application/vnd.ms-excel.sheet.macroEnabled.12=libreoffice-calc.desktop
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=libreoffice-calc.desktop
 [Added Associations]
 image/gif=zen.desktop;
 image/png=zen.desktop;gimp.desktop;
@@ -41,3 +48,4 @@ audio/mpeg=zen.desktop;
 image/heif=gimp.desktop;
 text/plain=dev.zed.Zed.desktop;
 application/vnd.openxmlformats-officedocument.presentationml.presentation=libreoffice-impress.desktop;
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=libreoffice-calc.desktop;
