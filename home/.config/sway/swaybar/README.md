@@ -17,9 +17,10 @@ Media shows title and artist, capped at 48 characters (24 when the bar needs
 the shorter label). It and its separator disappear when nothing is playing.
 The window title remains omitted.
 
-Uses the existing Python 3/PyGObject, libplayerctl bindings and wpctl installations. No additional
-status-bar package. Each module refreshes independently, so an unavailable
-service cannot block the rest.
+Uses the existing Python 3/PyGObject and wpctl installations. Media properties
+are queried directly over D-Bus with a 600 ms timeout per player, so a hung
+browser is skipped without libplayerctl aborting the status process. No additional
+status-bar package. Each module refreshes independently.
 
 Only native workspace buttons and tray icons respond to clicks. Workspace
 scrolling is disabled. All status blocks are display-only: no media controls,

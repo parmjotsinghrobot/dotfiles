@@ -14,8 +14,7 @@ import threading
 
 import gi
 
-gi.require_version("Playerctl", "2.0")
-from gi.repository import Gio, GLib, Playerctl
+from gi.repository import Gio, GLib
 
 
 def run(*args):
@@ -29,20 +28,31 @@ def block(name, text):
 
 
 def media():
-    for name in Playerctl.list_players():
-        if name.name == "playerctld":
+    bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
+    names = bus.call_sync(
+        "org.freedesktop.DBus", "/org/freedesktop/DBus",
+        "org.freedesktop.DBus", "ListNames", None,
+        GLib.VariantType.new("(as)"), Gio.DBusCallFlags.NONE, 1000, None).unpack()[0]
+    for name in sorted(names):
+        if not name.startswith("org.mpris.MediaPlayer2.") or name.endswith(".playerctld"):
             continue
         try:
-            player = Playerctl.Player.new_from_name(name)
-            if player.props.playback_status != Playerctl.PlaybackStatus.PLAYING:
+            # libplayerctl can abort the whole process on a hung player's timeout.
+            # Query D-Bus directly so failures stay bounded and recoverable.
+            properties = bus.call_sync(
+                name, "/org/mpris/MediaPlayer2", "org.freedesktop.DBus.Properties",
+                "GetAll", GLib.Variant("(s)", ("org.mpris.MediaPlayer2.Player",)),
+                GLib.VariantType.new("(a{sv})"), Gio.DBusCallFlags.NO_AUTO_START,
+                600, None).unpack()[0]
+            if properties.get("PlaybackStatus") != "Playing":
                 continue
-            metadata = player.props.metadata.unpack() if player.props.metadata else {}
+            metadata = properties.get("Metadata", {})
         except GLib.Error:
             continue
         title = metadata.get("xesam:title", "")
         artist = ", ".join(metadata.get("xesam:artist", []))
         text = " - ".join(part for part in (title, artist) if part)
-        text = " ".join((text or player.props.player_name).split())
+        text = " ".join((text or name.removeprefix("org.mpris.MediaPlayer2.")).split())
         label = text if len(text) <= 48 else text[:47] + "…"
         result = block("mpris", f"♪ {label}")
         result["short_text"] = "♪ " + (text if len(text) <= 24 else text[:23] + "…")
