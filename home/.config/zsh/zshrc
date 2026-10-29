@@ -79,7 +79,10 @@ if zmodload zsh/terminfo 2>/dev/null; then
     unset _key_cap _key_widget
 fi
 autoload -Uz compinit
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# Prefer prefix matches; fall back to a substring (e.g. 13 -> Folder 13).
+zstyle ':completion:*' matcher-list \
+    'm:{a-z}={A-Z}' \
+    'm:{a-z}={A-Z} l:|=* r:|=*'
 compinit -d "$_zsh_cache/zcompdump-$ZSH_VERSION"
 autoload -Uz promptinit colors
 promptinit
