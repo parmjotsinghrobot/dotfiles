@@ -26,7 +26,12 @@ Only native workspace buttons and tray icons respond to clicks. Workspace
 scrolling is disabled. All status blocks are display-only: no media controls,
 brightness/volume scrolling, mixer launcher or Bluetooth toggle.
 
-The broken audio idle inhibitor is disabled in autostart and omitted here.
+Audio idle inhibition runs separately from the bar via
+`sway-audio-idle-inhibit`. Active playback or recording blocks the five-minute
+idle suspend; stopping it starts a fresh idle countdown. Keep swayidle's
+`before-sleep` hooks: timeout-only invocations on swayidle 1.9.1 can fail to
+connect to logind and ignore the inhibitor. See
+<https://github.com/swaywm/swayidle/issues/198>.
 Stock swaybar has no status-block hover tooltips, CSS rounded workspace
 buttons, or independent left/centre/right module positioning. Calendar and
 device/network hover details are therefore unavailable. No substitute popup

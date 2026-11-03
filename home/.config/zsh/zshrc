@@ -79,11 +79,57 @@ if zmodload zsh/terminfo 2>/dev/null; then
     unset _key_cap _key_widget
 fi
 autoload -Uz compinit
-# Prefer prefix matches; fall back to a substring (e.g. 13 -> Folder 13).
+setopt COMPLETE_IN_WORD
+# Prefer prefixes, then abbreviations at separators (r.pdf -> report.pdf),
+# then substrings (13 -> Folder 13).
 zstyle ':completion:*' matcher-list \
     'm:{a-z}={A-Z}' \
+    'm:{a-z}={A-Z} r:|[._-]=* r:|=*' \
     'm:{a-z}={A-Z} l:|=* r:|=*'
 compinit -d "$_zsh_cache/zcompdump-$ZSH_VERSION"
+# Fill a missing path section at the cursor, e.g. sh|daily -> share/daily.
+# Only run after ordinary completion fails; bound traversal depth and work.
+_dotfiles_complete_path_gap() {
+    [[ -n $SUFFIX && -n $PREFIX ]] || return 1
+    local parent='' fragment=${(Q)${PREFIX##*/}}
+    [[ $PREFIX != */* ]] || parent=${PREFIX%/*}/
+    local base=${(Q)parent} tail=${(Q)SUFFIX} directory target relative
+    local -a frontier next targets directories files
+    local -i depth visited=0
+    [[ -n $base ]] || base=./
+    [[ $base != '~/'* ]] || base=$HOME/${base#\~/}
+    [[ -d $base && -n $fragment && $tail != /* ]] || return 1
+    frontier=( "$base""$fragment"*(N-/) )
+    (( $#frontier <= 512 )) || return 1
+    for depth in 1 2 3; do
+        next=()
+        for directory in $frontier; do
+            (( ++visited <= 512 )) || return 1
+            targets=( "$directory/$tail"*(N) )
+            (( $#targets <= 512 )) || return 1
+            for target in $targets; do
+                relative=${target#"$base"}
+                if [[ -d $target ]]; then
+                    directories+=( "$relative" )
+                elif [[ -f $target && ${words[1]} != (cd|pushd) ]]; then
+                    files+=( "$relative" )
+                fi
+            done
+            if (( depth < 3 )); then
+                next+=( "$directory"/*(N-/) )
+                (( $#next <= 512 )) || return 1
+            fi
+        done
+        (( $#directories + $#files )) && break
+        frontier=( "$next[@]" )
+    done
+    (( $#directories + $#files )) || return 1
+    [[ -z $parent ]] || compset -P '*/'
+    (( ! $#directories )) || compadd -U -i "$IPREFIX" -I "$ISUFFIX" -f -S / -- "$directories[@]"
+    (( ! $#files )) || compadd -U -i "$IPREFIX" -I "$ISUFFIX" -f -- "$files[@]"
+    return 0
+}
+zstyle ':completion:*' completer _complete _dotfiles_complete_path_gap
 autoload -Uz promptinit colors
 promptinit
 colors

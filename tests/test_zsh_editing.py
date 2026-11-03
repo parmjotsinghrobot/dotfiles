@@ -26,10 +26,19 @@ class ZshEditingTests(unittest.TestCase):
                              'Other 13', 'Folder 57', 'Other 57'):
                     (Path(tmp) / 'Documents' / name).mkdir(parents=True)
                 (Path(tmp) / 'Unique' / 'Folder 13').mkdir(parents=True)
+                for name in ('report.pdf', 'assignment.pdf'):
+                    (Path(tmp) / 'Documents' / name).touch()
+                (Path(tmp) / '.local/share/daily-nonsense').mkdir(parents=True)
+                for name in ('share/one/two/deep-target',
+                             'share/one/two/three/too-deep',
+                             'share/Folder Name/space-target',
+                             'share/ambiguous', 'shadow/ambiguous'):
+                    (Path(tmp) / '.local' / name).mkdir(parents=True)
+                (Path(tmp) / '.local/share/one/two/result.pdf').touch()
                 pid, fd = pty.fork()
                 if pid == 0:
                     os.chdir(tmp)
-                    os.environ.update(ZDOTDIR=str(config), TERM=terminal,
+                    os.environ.update(HOME=tmp, ZDOTDIR=str(config), TERM=terminal,
                                       XDG_CACHE_HOME=tmp, ZSH_TEST_DIR=tmp)
                     os.execvp('zsh', ['zsh', '-i'])
                 try:
@@ -68,6 +77,29 @@ class ZshEditingTests(unittest.TestCase):
                         (b'cd Documents/24\t', 'cd Documents/Report\\ 24\\ final/'),
                         (b'cd Documents/13\t', 'cd Documents/13-prefix/'),
                         (b'cd Documents/57\t', None),
+                        (b'echo Documents/r.pdf\t', 'echo Documents/report.pdf '),
+                        (b'echo Documents/a.pdf\t', 'echo Documents/assignment.pdf '),
+                        (b'cd ~/.local/shdaily-nonsense' + b'\x1b[D' * 14 + b'\t',
+                         'cd ~/.local/share/daily-nonsense/'),
+                        (b'cd .locadaily' + b'\x1b[D' * 5 + b'\t',
+                         'cd .local/share/daily-nonsense/'),
+                        (b'cd ~/.locadaily' + b'\x1b[D' * 5 + b'\t',
+                         'cd ~/.local/share/daily-nonsense/'),
+                        (b'cd ~/.local/shdaily' + b'\x1b[D' * 5 + b'\t',
+                         'cd ~/.local/share/daily-nonsense/'),
+                        (b'cd ~/.local/shdeep-target' + b'\x1b[D' * 11 + b'\t',
+                         'cd ~/.local/share/one/two/deep-target/'),
+                        (b'cd ~/.local/shspace-target' + b'\x1b[D' * 12 + b'\t',
+                         'cd ~/.local/share/Folder\\ Name/space-target/'),
+                        (b'cat ~/.local/shresult.pdf' + b'\x1b[D' * 10 + b'\t',
+                         'cat ~/.local/share/one/two/result.pdf'),
+                        (b'cd ~/.local/shtoo-deep' + b'\x1b[D' * 8 + b'\t',
+                         'cd ~/.local/shtoo-deep'),
+                        (b'cd ~/.local/sh/daily-nonsense' + b'\x1b[D' * 15 + b'\t',
+                         'cd ~/.local/share/daily-nonsense/'),
+                        (b'cd ~/.local/shambiguous' + b'\x1b[D' * 9 + b'\t',
+                         ('cd ~/.local/share/ambiguous/',
+                          'cd ~/.local/shadow/ambiguous/')),
                     ]
                     for keys, expected in cases:
                         if result.exists():
@@ -79,6 +111,8 @@ class ZshEditingTests(unittest.TestCase):
                             # An ambiguous substring must not pick either directory.
                             self.assertNotIn(buffer, ('cd Documents/Folder\\ 57/',
                                                       'cd Documents/Other\\ 57/'))
+                        elif isinstance(expected, tuple):
+                            self.assertNotIn(buffer, expected)
                         else:
                             self.assertEqual(buffer, expected, repr(keys))
                     # Exercise resize/redraw and completion across the old alarm interval.

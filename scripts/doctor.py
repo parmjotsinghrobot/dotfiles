@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {
     'sway': 'swayfx (the FX fork is required)', 'swaymsg': 'swayfx',
     'swaybar': 'swayfx', 'swaybg': 'swaybg', 'swaylock': 'swaylock-effects-git',
-    'swayidle': 'swayidle', 'kitty': 'kitty', 'zen-browser': 'zen-browser-bin',
+    'swayidle': 'swayidle', 'sway-audio-idle-inhibit': 'sway-audio-idle-inhibit-git',
+    'kitty': 'kitty', 'zen-browser': 'zen-browser-bin',
     'fuzzel': 'fuzzel', 'dunst': 'dunst', 'udiskie': 'udiskie',
     'nm-applet': 'network-manager-applet', 'cliphist': 'cliphist',
     'wl-copy': 'wl-clipboard', 'wl-paste': 'wl-clipboard', 'autotiling': 'autotiling',
