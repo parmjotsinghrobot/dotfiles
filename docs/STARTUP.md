@@ -13,9 +13,8 @@ guarded copy. Do not blindly kill desktop processes during the migration. Testin
 with a mocked Sway connection verifies duplicate prevention, not actual window
 behaviour in a logged-in Sway session.
 
-The `psd-resync.timer.d/frequency.conf` override resyncs every minute; its description
-now agrees with that interval. Installing source does not reload the running user
-service manager or alter an active timer.
+The dormant Profile-sync-daemon timer override and missing ckb-next autostart
+entry were retired on 4 November 2026. No running service needed stopping.
 
 ## Review and retire stale entries
 

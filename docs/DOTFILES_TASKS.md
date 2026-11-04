@@ -198,3 +198,7 @@ Fuzzel is now active for apps, clipboard and emoji with separate native usage ca
 ## Retired components (4 November 2026)
 
 Bash startup files, Cava and Tofi are no longer deployed or listed as dependencies. Earlier completed tasks above record the migration history. The emoji picker moved to `~/.local/bin/emoji-picker`; Fuzzel app and emoji usage caches are unchanged. The historical Tofi importer remains available for recovery, and the installed-package snapshot remains a dated record.
+
+## Follow-up cleanup (4 November 2026)
+
+Retired the PSD timer override, ckb-next autostart and wpaperd config/commented startup bindings. Wallpaper files and the separate Corsair input rule were preserved. Kept the EQ, reset its old earphone gains to flat, and enabled automatic WirePlumber filtering for Galaxy Buds 3 FE; see AUDIO_EQ.md. MPD service settings/enablement were left alone.

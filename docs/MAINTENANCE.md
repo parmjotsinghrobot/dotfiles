@@ -6,10 +6,10 @@ The original checkout already had the Waybar files staged for deletion; the
 private recovery snapshot and original Git history preserve them. The old
 `launch-waybar` helper belongs to the retired setup.
 
-wpaperd is a dormant alternative: Sway uses its configured wallpaper directly.
+wpaperd was retired on 4 November 2026; Sway uses swaybg for its configured wallpaper.
 GTKlock is also dormant; the active lock command uses Swaylock Effects. Its old
 CSS depends on `/tmp/lockscreen.png`, which is temporary state, not a managed
-asset. Neither alternative should be added to autostart without deliberately
+asset. GTKlock should not be added to autostart without deliberately
 replacing and testing the current wallpaper/lock workflow.
 
 ## Old files and recovery storage

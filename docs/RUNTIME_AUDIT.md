@@ -1,21 +1,21 @@
 # Desktop runtime and deployment audit
 
-Reviewed live on 4 November 2026 (Pacific/Auckland). Scope: every entry in the current deployment manifest, Sway startup commands and keybinds, user services/sockets/timers, XDG autostart entries, running system services, and desktop package lists. This is a current-session snapshot, not an application-usage history or proof that a disconnected device is never used. No other candidate was removed, disabled or stopped during this audit.
+Reviewed live on 4 November 2026 (Pacific/Auckland). Scope: every entry in the current deployment manifest, Sway startup commands and keybinds, user services/sockets/timers, XDG autostart entries, running system services, and desktop package lists. This is a current-session snapshot, not an application-usage history or proof that a disconnected device is never used. The initial audit only removed xsettingsd. The approved follow-up below retired three additional dormant components and fixed EQ routing.
 
 ## Change applied
 
 Removed the dormant `.config/xsettingsd/xsettingsd.conf` source and manifest entry, plus its owned live symlink. xsettingsd is not installed, running or configured to start; there was no daemon to kill. Updated current toolkit/font documentation. Original config and link are recoverable under `~/.local/state/dotfiles-cleanup/20261104T005640Z`.
 
-There are now **67 manifest entries** in the working tree. The existing, uncommitted low-memory notification additions are included in that count and were preserved.
+The initial post-xsettingsd audit had 67 manifest entries. After the approved follow-up there are **65 manifest entries** in the working tree. The existing, uncommitted low-memory notification additions are included in that count and were preserved.
 
-## Suggested next decisions, in priority order
+## Findings and follow-up decisions
 
 | Priority | Candidate | Current evidence | Recommendation and consequence |
 | --- | --- | --- | --- |
-| 1 | Profile-sync-daemon timer override | `.config/systemd/user/psd-resync.timer.d/frequency.conf` is deployed, but `profile-sync-daemon` is not installed and neither `psd.service` nor `psd-resync.timer` exists. | Remove the drop-in from source/deployment. It currently changes nothing; this does not remove browser profiles. |
-| 1 | ckb-next autostart entry | `.config/autostart/ckb-next.autostart.desktop` points to `/usr/bin/ckb-next`, which is absent. No ckb process or currently attached Corsair keyboard was found. | Remove the dead autostart entry. Retain the separate Corsair input rule if the keyboard is still used when docked; today's absence cannot settle that. |
-| 2 | Legacy wpaperd config | `.config/wpaperd/config.toml` remains tracked and exists live, but is outside the manifest. wpaperd is not running; its Sway start/keybind lines are commented. Sway already runs swaybg. | Remove the unused source/live config if wallpaper rotation is no longer wanted. Keep swaybg. |
-| 2 | PipeWire equalizer | `sink-eq6.conf` is deployed and its ten-band `effect_input.eq6` / `effect_output.eq6` nodes exist. The output is linked to the Bluetooth sink, but the visible Zen and MPD streams connect directly to that sink; no source is linked into the EQ input in this snapshot. | Decide whether EQ is wanted. If not, remove its config next turn and arrange an audio restart separately. If yes, fix routing instead. Loaded does not mean it is processing the app audio. |
+| 1 | Profile-sync-daemon timer override | `.config/systemd/user/psd-resync.timer.d/frequency.conf` is deployed, but `profile-sync-daemon` is not installed and neither `psd.service` nor `psd-resync.timer` exists. | Completed: removed the source/deployed drop-in, preserving a private backup. Browser profiles were not changed. |
+| 1 | ckb-next autostart entry | `.config/autostart/ckb-next.autostart.desktop` points to `/usr/bin/ckb-next`, which is absent. No ckb process or currently attached Corsair keyboard was found. | Completed: removed the dead entry. The separate Corsair input rule is retained for possible docked use. |
+| 2 | Legacy wpaperd config | `.config/wpaperd/config.toml` remains tracked and exists live, but is outside the manifest. wpaperd is not running; its Sway start/keybind lines are commented. Sway already runs swaybg. | Completed: removed the source/live config and commented startup/keybind references. Kept swaybg and wallpaper images. |
+| 2 | PipeWire equalizer | `sink-eq6.conf` is deployed and its ten-band `effect_input.eq6` / `effect_output.eq6` nodes exist. The output is linked to the Bluetooth sink, but the visible Zen and MPD streams connect directly to that sink; no source is linked into the EQ input in this snapshot. | Completed: kept EQ, flattened all ten gains, and enabled automatic filtering for Galaxy Buds 3 FE. Live app links and fresh silent streams now traverse it. See AUDIO_EQ.md. |
 | 3 | Peaclock alias/package suggestion | Installed; not running. Zsh has an alias specifying `.config/peaclock`, but no Peaclock config is deployed. | Optional utility, not a background cost. Drop the alias/package-list suggestion if unused, or configure it deliberately. |
 | 3 | Engineering example and deployed README files | `.config/shell/engineering.example.sh`, `.config/zsh/README.md` and `.config/sway/swaybar/README.md` are documentation/sample files, not runtime services. | Keep these in the repo; optionally stop linking them into the live home directory. Never remove plugin companion files merely because they are not separate manifest entries. |
 
@@ -99,9 +99,9 @@ No system package, service, socket or timer was disabled or removed.
 
 ## Verification and limits
 
-Used live process counts, systemd user services/sockets/timers and system running-service lists, Sway outputs/input IDs/window classes (without window titles), selected process environment keys, PipeWire nodes/links, package presence, deployed-link ownership, and the repo's read-only doctor. Doctor reported zero required checks missing. All 67 remaining manifest destinations are the expected repo links; deployment preview requires zero changes.
+Used live process counts, systemd user services/sockets/timers and system running-service lists, Sway outputs/input IDs/window classes (without window titles), selected process environment keys, PipeWire nodes/links, package presence, deployed-link ownership, and the repo's read-only doctor. Doctor reported zero required checks missing. All 65 remaining manifest destinations are the expected repo links; deployment preview requires zero changes.
 
-This is not a resource benchmark or a historical usage study. No private application content, credentials or notes were copied into this report. No GUI, notification, lock, suspend, email job or audio restart was triggered for verification. Removal candidates other than xsettingsd remain intact for the next turn.
+This is not a resource benchmark or a historical usage study. No private application content, credentials or notes were copied into this report. No GUI, notification, lock, suspend, email job or audio restart was triggered for verification. The follow-up created only temporary silent playback test streams. Other optional features remain intact. MPD services/configuration were explicitly left alone. See AUDIO_EQ.md for the live routing validation and its limits.
 
 ## Complete remaining deployment allowlist
 
@@ -112,7 +112,6 @@ All entries below were checked for their expected live link. Runtime roles and r
 .config/Kvantum/catppuccin-mocha-pink/catppuccin-mocha-pink.kvconfig
 .config/Kvantum/catppuccin-mocha-pink/catppuccin-mocha-pink.svg
 .config/Kvantum/kvantum.kvconfig
-.config/autostart/ckb-next.autostart.desktop
 .config/dunst/dunstrc
 .config/environment.d/qt.conf
 .config/fontconfig/fonts.conf
@@ -154,7 +153,6 @@ All entries below were checked for their expected live link. Runtime roles and r
 .config/swaylock/config
 .config/systemd/user/default.target.wants/low-memory-notify.service
 .config/systemd/user/low-memory-notify.service
-.config/systemd/user/psd-resync.timer.d/frequency.conf
 .config/zsh/.zshrc
 .config/zsh/README.md
 .config/zsh/plugins/omz-lib/git.zsh

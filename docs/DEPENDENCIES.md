@@ -61,6 +61,6 @@ The diagnostic performs only local read queries and Python import checks, suppre
 
 ## Selected local settings
 
-Git enables an LFS filter, so `git-lfs` is included as an optional Git feature dependency; signed commits also require GnuPG and the user's existing private signing key, which is never deployed. The captured ckb-next autostart relies on a locally installed, unowned `/usr/bin/ckb-next` executable; reinstall that hardware app deliberately on another machine or omit the autostart entry. Generated Thunderbird/Evolution mail-handler associations were removed because their application executables are absent; choose an installed mail client locally. Optional MPD service enablement is documented in CAPTURE.md and is not enabled automatically.
+Git enables an LFS filter, so `git-lfs` is included as an optional Git feature dependency; signed commits also require GnuPG and the user's existing private signing key, which is never deployed. Generated Thunderbird/Evolution mail-handler associations were removed because their application executables are absent; choose an installed mail client locally. Optional MPD service enablement is documented in CAPTURE.md and is not enabled automatically.
 
 Fuzzel is the launcher requirement; Tofi and Cava are no longer managed. `gsettings-desktop-schemas` supplies shared UI/document/monospace preferences. Run `python3 scripts/apply-ui-fonts.py --apply` after deployment to set these session values; previous values are saved under XDG state storage.
