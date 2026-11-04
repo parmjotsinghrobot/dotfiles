@@ -2,7 +2,7 @@
 
 Iosevka Curly is the UI, document and monospace default at 10 pt. Dunst uses 13 pt, restoring the original notification font size. The launcher stays at 14 pt and Swaybar at 9 pt. Icon fonts and Noto Color Emoji remain dedicated glyph fallbacks.
 
-Managed settings cover GTK2/3/4, Qt5/6, Xsettings, Dunst and Fontconfig. Fontconfig first-family rules select Iosevka for generic sans-serif, serif, monospace and system-ui requests, with Noto Color Emoji as fallback. Explicit icon families are left alone. Apps or web content that explicitly request another named font can override generic defaults.
+Managed settings cover GTK2/3/4, Qt5/6, Dunst and Fontconfig. Fontconfig first-family rules select Iosevka for generic sans-serif, serif, monospace and system-ui requests, with Noto Color Emoji as fallback. Explicit icon families are left alone. Apps or web content that explicitly request another named font can override generic defaults.
 
 ## Session settings
 

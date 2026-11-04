@@ -48,7 +48,6 @@
     ".config/sway/swaybar/status.py",
     ".config/swaylock/config",
     ".config/systemd/user/psd-resync.timer.d/frequency.conf",
-    ".config/xsettingsd/xsettingsd.conf",
     ".config/zsh/.zshrc",
     ".config/zsh/README.md",
     ".config/zsh/plugins/omz-lib/git.zsh",

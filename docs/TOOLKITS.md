@@ -6,7 +6,7 @@ These are source settings for deployment. No running desktop settings were chang
 
 - GTK3/GTK4 settings select the installed `catppuccin-mocha-pink-standard+default` theme. GTK4 CSS and assets remain symlinks into `/usr/share/themes`; install the theme package before deploying. GTK3's empty `gtk.css` intentionally adds no override.
 - `.gtkrc-2.0` and the two legacy `.config/gtkrc*` files use the same GTK2 choices. The missing `.gtkrc-2.0.mine` include was removed. They contain preferences, without generated ownership warnings or machine paths.
-- Xsettings covers XWayland clients and agrees on fonts, cursor size, rendering and 96 × 1024 DPI. Both cursor default `index.theme` files select the same cursor.
+- Both cursor default `index.theme` files select the same cursor. The dormant xsettingsd configuration was retired on 4 November 2026: no daemon was installed, running or configured to start.
 - Fontconfig enables grayscale antialiasing and slight hinting without forcing a second DPI or LCD filter. It keeps support for the legacy `~/.fonts` directory.
 - `nwg-look` can rewrite GTK settings, GTK2 and cursor defaults and apply GSettings immediately. Treat this repo as authoritative: after using it, review only intentional preference changes back into these files. Qt configuration GUIs similarly rewrite files; window geometry is intentionally excluded here.
 
@@ -50,4 +50,4 @@ Still required after deployment: GTK2/3/4, Qt5, Qt6 and XWayland app inspection 
 
 ## Monospace follow-up
 
-The user selected Iosevka Curly for all desktop text. GTK2/3/4, Xsettings and Qt5/6 now name it explicitly. Generic Fontconfig text families also select it with Noto Color Emoji fallback; first-family matching leaves explicit icon fonts alone. GSettings UI/document/monospace values are applied with `scripts/apply-ui-fonts.py --apply`, which saves their previous values privately. New Qt offscreen probes verify the font change; earlier Noto Sans measurements above describe the initial migration. Restart apps which retain their fonts at launch.
+The user selected Iosevka Curly for all desktop text. GTK2/3/4 and Qt5/6 now name it explicitly. Generic Fontconfig text families also select it with Noto Color Emoji fallback; first-family matching leaves explicit icon fonts alone. GSettings UI/document/monospace values are applied with `scripts/apply-ui-fonts.py --apply`, which saves their previous values privately. New Qt offscreen probes verify the font change; earlier Noto Sans measurements above describe the initial migration. Restart apps which retain their fonts at launch.
