@@ -101,7 +101,7 @@ No system package, service, socket or timer was disabled or removed.
 
 Used live process counts, systemd user services/sockets/timers and system running-service lists, Sway outputs/input IDs/window classes (without window titles), selected process environment keys, PipeWire nodes/links, package presence, deployed-link ownership, and the repo's read-only doctor. Doctor reported zero required checks missing. All 65 remaining manifest destinations are the expected repo links; deployment preview requires zero changes.
 
-This is not a resource benchmark or a historical usage study. No private application content, credentials or notes were copied into this report. No GUI, notification, lock, suspend, email job or audio restart was triggered for verification. The follow-up created only temporary silent playback test streams. Other optional features remain intact. MPD services/configuration were explicitly left alone. The subsequent approved curve fit replaces the flat gains with four filters and a −2.9 dB preamp. See AUDIO_EQ.md for current parameters, live routing validation and limits.
+This is not a resource benchmark or a historical usage study. No private application content, credentials or notes were copied into this report. No GUI, notification, lock, suspend, email job or audio restart was triggered for verification. The follow-up created only temporary silent playback test streams. Other optional features remain intact. MPD services/configuration were explicitly left alone. The subsequent approved tuning now preserves original bass and fits the treble more closely, using seven filters and a −7.9 dB preamp. See AUDIO_EQ.md for current parameters, live routing validation and limits.
 
 ## Complete remaining deployment allowlist
 

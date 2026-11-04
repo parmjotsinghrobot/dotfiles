@@ -1,42 +1,67 @@
 {
   "source_url": "https://www.soundguys.com/product/samsung-galaxy-buds-3-fe/",
   "measurement_fixture": "B&K 5128",
-  "target": "SoundGuys displayed preference curve (SVG approximation)",
+  "target": "SoundGuys displayed target above 350 Hz; original bass below 150 Hz; log-frequency blend between",
   "fit_range_hz": [
     20,
-    6000
+    20000
   ],
-  "correction_strength": 0.85,
-  "preamp_db": -2.9,
-  "preamp_linear": 0.71614341,
+  "correction_strength": 1.0,
+  "preamp_db": -7.9,
+  "preamp_linear": 0.402717034,
   "bands": [
     {
-      "type": "bq_lowshelf",
-      "freq": 90,
+      "node": "eq_band_2",
+      "type": "bq_peaking",
+      "freq": 822,
+      "q": 1.144,
+      "gain": 2.16
+    },
+    {
+      "node": "eq_band_3",
+      "type": "bq_peaking",
+      "freq": 1538,
+      "q": 2.5,
+      "gain": -1.05
+    },
+    {
+      "node": "eq_band_4",
+      "type": "bq_peaking",
+      "freq": 6275,
+      "q": 1.56,
+      "gain": -3.35
+    },
+    {
+      "node": "eq_band_5",
+      "type": "bq_peaking",
+      "freq": 9759,
+      "q": 2.014,
+      "gain": 8.0
+    },
+    {
+      "node": "eq_band_7",
+      "type": "bq_peaking",
+      "freq": 12341,
+      "q": 3.314,
+      "gain": -4.51
+    },
+    {
+      "node": "eq_band_8",
+      "type": "bq_peaking",
+      "freq": 15300,
+      "q": 2.301,
+      "gain": 5.87
+    },
+    {
+      "node": "eq_band_10",
+      "type": "bq_highshelf",
+      "freq": 18360,
       "q": 0.707,
-      "gain": -3.24
-    },
-    {
-      "type": "bq_peaking",
-      "freq": 764,
-      "q": 1.422,
-      "gain": 1.9
-    },
-    {
-      "type": "bq_peaking",
-      "freq": 1544,
-      "q": 1.5,
-      "gain": -0.31
-    },
-    {
-      "type": "bq_peaking",
-      "freq": 6000,
-      "q": 1.5,
-      "gain": -1.41
+      "gain": -4.5
     }
   ],
-  "max_eq_boost_db": 1.8412490049829044,
-  "fit_rmse_db": 0.48593520024742354,
-  "before_target_rmse_db": 2.0224950204052803,
-  "after_target_rmse_db": 0.6713820103017457
+  "max_eq_boost_db": 6.894289709110419,
+  "fit_rmse_db": 0.46548947192975487,
+  "treble_target_rmse_db": 0.4928961524247259,
+  "max_bass_shape_change_db": 0.05495317255631707
 }
