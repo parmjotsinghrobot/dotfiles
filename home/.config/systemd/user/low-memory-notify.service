@@ -1,0 +1,11 @@
+[Unit]
+Description=Desktop warnings for low available RAM and memory pressure
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/low-memory-notify
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
