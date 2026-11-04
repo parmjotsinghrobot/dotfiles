@@ -19,6 +19,11 @@ The compositor must be **SwayFX** (`swayfx 0.6-0` in the snapshot), because the 
 
 The bar uses Python, PyGObject and the **Playerctl 2.0 GI namespace** (`python`, `python-gobject`, `playerctl`). Sticky notes require `python-i3ipc`. The bar reads memory/backlight/battery from Linux `/proc` and `/sys`, Bluetooth through the system D-Bus BlueZ service, MPRIS through the user D-Bus session and audio through `wpctl`/WirePlumber. Installed binaries and imports do not prove these services are running.
 
+The memory warning service builds its C source locally using `gcc` (`cc`) and
+sends desktop notifications using `libnotify` (`notify-send`). Both are included
+in `desktop-official.txt`. It requires Linux PSI at `/proc/pressure/memory` and
+a running notification daemon.
+
 ## Fonts and visual assets
 
 | Asset | Installed package/source | Setting |

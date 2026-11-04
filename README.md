@@ -65,6 +65,30 @@ Super+Space launches Fuzzel, Super+Q opens Kitty, Super+B opens the browser, Sup
 
 The active bar is native Swaybar with a Python status script. SwayFX and swaylock-effects are required for configured visual effects. Swaybar controls, tray behaviour and limitations are documented alongside its files.
 
+## Memory warnings
+
+Deployment includes a user service enabled for the next login. It checks available
+RAM every second (warn below 1 GiB, re-arm above 1.25 GiB) and monitors memory
+pressure (200 ms of observed stalls within 2 seconds, 60-second alert cooldown).
+Pressure events are checked against recent counters to reject startup artefacts.
+
+The launcher compiles the tracked C source into `~/.cache/low-memory-notify/monitor`
+on first start and when the source or launcher changes. Build products stay out of
+Git. Install `gcc` and `libnotify` from the desktop package list; a graphical
+notification daemon and Linux PSI support are also needed.
+
+Deploying does not restart an existing service. To activate or update it immediately:
+
+```sh
+systemctl --user daemon-reload
+systemctl --user restart low-memory-notify.service
+systemctl --user status low-memory-notify.service
+```
+
+Remove the managed `default.target.wants/low-memory-notify.service` entry from the
+manifest if you do not want it enabled on future deployments, then run
+`systemctl --user disable --now low-memory-notify.service`.
+
 ## Validation
 
 ```sh

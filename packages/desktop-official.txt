@@ -8,12 +8,14 @@ curl
 dunst
 fontconfig
 fuzzel
+gcc
 git
 gnupg
 grim
 gsettings-desktop-schemas
 kitty
 less
+libnotify
 micro
 network-manager-applet
 networkmanager

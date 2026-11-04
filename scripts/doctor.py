@@ -20,6 +20,7 @@ REQUIRED = {
     'micro': 'micro', 'grim': 'grim', 'slurp': 'slurp', 'brightnessctl': 'brightnessctl',
     'wpctl': 'wireplumber', 'playerctl': 'playerctl',
     'antidot': 'antidot-bin', 'zsh': 'zsh', 'git': 'git', 'curl': 'curl',
+    'cc': 'gcc (builds the memory monitor)', 'notify-send': 'libnotify',
     'fc-match': 'fontconfig', 'xdg-user-dir': 'xdg-user-dirs', 'gpgconf': 'gnupg',
 }
 OPTIONAL = {'checkupdates': 'pacman-contrib; optional update greeting',
@@ -92,6 +93,9 @@ def main():
         '.zshenv', '.config/zsh/zshrc', '.config/kitty/current-theme.conf',
         '.config/sway/swaybar/status.py', '.local/bin/sticky-notes-daemon.py',
         '.local/bin/clipboard-picker', '.local/bin/launch-app',
+        '.local/bin/low-memory-notify', '.local/share/low-memory-notify/monitor.c',
+        '.config/systemd/user/low-memory-notify.service',
+        '.config/systemd/user/default.target.wants/low-memory-notify.service',
         '.local/bin/emoji-picker',
         '.config/zsh/themes/passion/passion.zsh-theme',
         '.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh',

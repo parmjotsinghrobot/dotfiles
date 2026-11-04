@@ -15,8 +15,9 @@ credentials, browser profiles, caches and histories out of the repository.
 ## Preview and apply
 
 Python 3.9+ is required. Initialise the documented Git submodules and install the
-documented dependencies before deployment. No packages or services are modified
-by this script.
+documented dependencies before deployment. No packages are installed and no running services are restarted by this script.
+The managed memory-monitor unit and its `default.target.wants` link enable it
+for the next login; see the README for immediate activation.
 
 ```sh
 cd ~/dotfiles
