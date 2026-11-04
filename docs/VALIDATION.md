@@ -24,7 +24,7 @@ An initial apply failed at a sandbox overlay cross-device rename; its partial ch
 
 ## Remaining direct checks
 
-During the initial migration no compositor reload, logout, service restart, screen lock or suspend was triggered. The later Fuzzel/monospace pass validated and reloaded Sway and Dunst, with no logout, lock or suspend. A fresh graphical login is needed for environment.d changes and to retire any old notes-daemon instance. Inspect Tofi launch/clipboard/emoji menus, notifications, bar/tray, toolkit apps, transparency over bright/dark wallpaper, font fallback and scaled monitors. Test lock/suspend/resume directly. GTK/libadwaita, Qt Quick and app-rendered surfaces can remain opaque. Browser/editor/chat/music-app theme preferences are not comprehensively migrated by this desktop pass.
+During the initial migration no compositor reload, logout, service restart, screen lock or suspend was triggered. The later Fuzzel/monospace pass validated and reloaded Sway and Dunst, with no logout, lock or suspend. A fresh graphical login is needed for environment.d changes and to retire any old notes-daemon instance. Inspect Fuzzel launch/clipboard/emoji menus, notifications, bar/tray, toolkit apps, transparency over bright/dark wallpaper, font fallback and scaled monitors. Test lock/suspend/resume directly. GTK/libadwaita, Qt Quick and app-rendered surfaces can remain opaque. Browser/editor/chat/music-app theme preferences are not comprehensively migrated by this desktop pass.
 
 Post-staging checks include Git submodule registration and staged whitespace checks; three copied settings files had extra blank EOF lines, corrected before commit.
 

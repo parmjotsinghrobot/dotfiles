@@ -14,7 +14,7 @@ DEFAULT_CMD=${BEMOJI_DEFAULT_CMD:-}
 CMDS=""
 
 # Picker command order
-PICKERS="${BEMOJI_PICKER:-fuzzel tofi bemenu wofi rofi dmenu ilia}"
+PICKERS="${BEMOJI_PICKER:-fuzzel bemenu wofi rofi dmenu ilia}"
 
 usage() {
     cat >&2 <<EOF
@@ -27,7 +27,7 @@ Options:
   -e, --echo          Output emoji only
   -n, --newline       Add newline after output
   -f FILE             Custom emoji file/URL
-  --picker NAME       Choose a picker, e.g. fuzzel or tofi
+  --picker NAME       Choose a picker, e.g. fuzzel or bemenu
   -D TYPES            Download lists (all,emoji,math,nerd)
   -v, --version       Show version
   -h, --help          Show this help
@@ -106,7 +106,6 @@ picker_command() {
                     (umask 077 && mkdir -p "$(dirname "$emoji_cache")") || exit 1
                     exec fuzzel --dmenu --only-match --cache="$emoji_cache"
                     ;;
-                tofi) exec tofi
             esac
         fi
     done
@@ -156,7 +155,7 @@ while [ $# -gt 0 ]; do
         --picker)
             [ $# -ge 2 ] || { msg "--picker requires a name"; usage 1; }
             case $2 in
-                tofi|fuzzel|bemenu|wofi|rofi|dmenu|ilia) PICKERS=$2 ;;
+                fuzzel|bemenu|wofi|rofi|dmenu|ilia) PICKERS=$2 ;;
                 *) msg "Unsupported picker: $2"; exit 1 ;;
             esac
             shift

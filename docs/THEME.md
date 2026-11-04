@@ -26,12 +26,12 @@ Use Base text on a filled Pink selection. A highlighted match can use Pink on Ba
 ## Fonts, scale and transparency
 
 - UI/documents: **Iosevka Curly 10 pt**, explicitly named in GTK, Qt, Xsettings and GSettings. Notifications use **Iosevka Curly 13 pt**, preserving their original font size. Fontconfig generic sans-serif, serif, monospace and system-ui families select Iosevka Curly with Noto Color Emoji fallback.
-- Monospace: **Iosevka Curly 10 pt**, including Kitty. Tofi deliberately uses 14 pt for scanning a launcher; Swaybar uses 9 pt to fit its 26-pixel bar. Icon/emoji fallback may use the installed symbol and emoji fonts.
+- Monospace: **Iosevka Curly 10 pt**, including Kitty. Fuzzel uses 14 pt for scanning a launcher; Swaybar uses 9 pt to fit its 26-pixel bar. Icon/emoji fallback may use the installed symbol and emoji fonts.
 - Icons: **Papirus-Dark**. It is an intentional complete icon set, so every icon need not be Pink.
 - Cursor: **catppuccin-mocha-pink-cursors**, size **24**, in Sway, GTK, Xsettings and both user cursor defaults.
 - Logical DPI: **96**; GTK/Xsettings encode this as **98304** (96 × 1024). Use Sway per-output scaling for physical display size, recorded in the machine's output configuration. Avoid a second forced Fontconfig DPI such as 143.
 - Rendering: antialiasing on, slight hinting, no subpixel rendering. This avoids conflicting RGB assumptions across differently scaled outputs.
-- Use Kitty's **0.8 background opacity** as the reference: Mocha Base with `cc` alpha for Tofi, Swaybar and Dunst; supported Kvantum window/menu backgrounds reduce opacity by 20%. Keep text and controls opaque. GTK/libadwaita and application-rendered surfaces may need opaque backgrounds; do not fade whole windows to force the effect. Swaylock retains its blurred screenshot, visible clock/status text and intentionally invisible ring/interior/highlights; its native effects do not provide a full-screen Mocha tint. Check all transparency over bright and dark wallpaper. Blur is a compositor effect, not a replacement for contrast.
+- Use Kitty's **0.8 background opacity** as the reference: Mocha Base with `cc` alpha for Fuzzel, Swaybar and Dunst; supported Kvantum window/menu backgrounds reduce opacity by 20%. Keep text and controls opaque. GTK/libadwaita and application-rendered surfaces may need opaque backgrounds; do not fade whole windows to force the effect. Swaylock retains its blurred screenshot, visible clock/status text and intentionally invisible ring/interior/highlights; its native effects do not provide a full-screen Mocha tint. Check all transparency over bright and dark wallpaper. Blur is a compositor effect, not a replacement for contrast.
 
 Iosevka Curly resolves to its installed family. Generic font selection was checked with `fc-match`; explicit icon families and emoji fallback are preserved. Application-specific named fonts can still override generic choices.
 
@@ -58,7 +58,7 @@ Paths below are relative to `$HOME`; managed copies live under the repo's `home/
 | SwayFX | `.config/sway/config.d/40-visuals.conf`, `50-miscellaneous.conf`, `99-swayfx.conf` | Pink focus where exposed, Mocha surfaces, consistent cursor; effects remain deliberate |
 | Displays | `.config/sway/config.d/20-outputs.conf` or its machine-profile replacement | Per-output scale; check laptop/external display transitions |
 | Swaybar | `.config/sway/swaybar/bar.conf`, `status.py` | Preserve existing Mocha/Pink workspace states; semantic status colours; inspect tray and glyph fallback |
-| Tofi | `.config/tofi/config` | Explicit background, foreground, selected row, match, prompt, placeholder and border; check launch, clipboard and emoji menus |
+| Fuzzel | `.config/fuzzel/fuzzel.ini` | Explicit background, foreground, selected row, match, prompt, placeholder and border; check launch, clipboard and emoji menus |
 | GTK3/4 | `.config/gtk-3.0/settings.ini`, `.config/gtk-4.0/settings.ini`, GTK4 CSS/assets links | Mocha Pink, Iosevka Curly, Papirus-Dark, cursor 24; inspect one app per toolkit |
 | GTK2 | `.gtkrc-2.0`, selected `.config/gtkrc` if actually consumed | Same asset/font choices; resolve missing includes |
 | Xsettings | `.config/xsettingsd/xsettingsd.conf` | Same GTK/font/cursor values and logical DPI; inspect XWayland app |
@@ -70,11 +70,11 @@ Paths below are relative to `$HOME`; managed copies live under the repo's `home/
 | Dunst | `.config/dunst/dunstrc` | Mocha surfaces/Text; Pink normal accent, Red critical; inspect short/long notifications |
 | Swaylock | `.config/swaylock/config` | Invisible ring/interior; Mocha Text clock, Teal verifying, Red failure, Yellow warning; check actual lock interaction |
 | Micro | `.config/micro/settings.json`, selected colour scheme | Preserve syntax/diff semantics and Pink UI accent |
-| Btop/Cava | Selected `.config/btop/btop.conf` and theme; `.config/cava/config` | Mocha backgrounds, Pink primary accent, semantic alerts; inspect terminal rendering |
+| Btop | Selected `.config/btop/btop.conf` and theme | Mocha backgrounds, Pink primary accent, semantic alerts; inspect terminal rendering |
 | Browser/editor/chat/music | Selected theme preferences or extension list only | Later application pass: Mocha Pink where supported; document any app limitation |
 
 GUI tools such as `nwg-look`, `qt5ct` and `qt6ct` can rewrite their settings. Treat the repo files as authoritative: after using a GUI, review and copy only intentional preference changes back to the repo, excluding window geometry and session state. Do not let a second tool silently own the same choice. The shared JSON is reference data; editing it alone does not update GTK or Qt.
 
 ## Acceptance on the actual desktop
 
-After deploying and starting a fresh login, check normal/focused/inactive/selected/error states, toolkit cursor transitions, notification urgency and lock verification/failure. Run the three Tofi uses with long labels and emoji. Check text and transparency over bright/dark wallpaper on the laptop and scaled external displays. Repeat a compositor reload and check that appearance remains consistent. Screenshot review and direct lock/suspend testing remain necessary; parsing config files cannot establish these results.
+After deploying and starting a fresh login, check normal/focused/inactive/selected/error states, toolkit cursor transitions, notification urgency and lock verification/failure. Run the Fuzzel app, clipboard and emoji menus with long labels and emoji. Check text and transparency over bright/dark wallpaper on the laptop and scaled external displays. Repeat a compositor reload and check that appearance remains consistent. Screenshot review and direct lock/suspend testing remain necessary; parsing config files cannot establish these results.

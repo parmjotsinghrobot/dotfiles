@@ -7,7 +7,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / 'home/.config/tofi/scripts/emoji-picker.sh'
+SCRIPT = ROOT / 'home/.local/bin/emoji-picker'
 
 
 class EmojiPickerTests(unittest.TestCase):
@@ -22,13 +22,13 @@ class EmojiPickerTests(unittest.TestCase):
         (self.db / 'emojis.txt').write_text('😀 grinning face\n👩🏽‍💻 woman technologist\n')
         self.env = {**os.environ, 'HOME': str(self.root), 'PATH': str(self.bin) + ':' + os.environ['PATH'],
                     'XDG_CACHE_HOME': str(self.root / 'cache with spaces'),
-                    'BEMOJI_DB_LOCATION': str(self.db), 'BEMOJI_PICKER': 'tofi',
+                    'BEMOJI_DB_LOCATION': str(self.db), 'BEMOJI_PICKER': 'fuzzel',
                     'PICKER_LOG': str(self.root / 'picker.json'),
                     'FAKE_RESULT': '👩🏽‍💻 woman technologist', 'FAKE_STATUS': '0'}
         self.env.pop('BEMOJI_PICKER', None)
         self.env.pop('BEMOJI_FUZZEL_CACHE', None)
         self.env.pop('BEMOJI_CUSTOM_LIST', None)
-        for picker in ('fuzzel', 'tofi'):
+        for picker in ('fuzzel',):
             path = self.bin / picker
             path.write_text('#!/usr/bin/env python3\nimport json, os, sys\n'
                             'from pathlib import Path\n'
@@ -57,9 +57,11 @@ class EmojiPickerTests(unittest.TestCase):
         self.assertEqual(json.loads((self.root / 'picker.json').read_text())['name'], 'fuzzel')
         self.assertTrue((self.root / 'cache with spaces/bemoji').is_dir())
 
-    def test_tofi_override_is_retained(self):
-        self.assertEqual(self.invoke('--picker', 'tofi').returncode, 0)
-        self.assertEqual(json.loads((self.root / 'picker.json').read_text())['name'], 'tofi')
+    def test_retired_tofi_backend_is_rejected(self):
+        result = self.invoke('--picker', 'tofi')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Unsupported picker', result.stderr)
+        self.assertFalse((self.root / 'picker.json').exists())
 
     def test_cache_override_is_one_argument(self):
         self.env['BEMOJI_FUZZEL_CACHE'] = str(self.root / 'custom state/emoji counts')

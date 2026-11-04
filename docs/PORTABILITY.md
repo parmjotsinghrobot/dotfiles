@@ -6,7 +6,7 @@ On a different machine, remove that include or replace it with a reviewed profil
 
 ## Shell paths and engineering tools
 
-`~/.zshenv` and Bash source `shell/environment.sh`. It establishes XDG defaults without overriding existing values, adds `~/.local/bin` once and preserves `GNUPGHOME=~/.local/share/gnupg` unless explicitly set. Existing signing keys stay where they are. The terminal TTY is set interactively; gpg-agent is socket activated.
+`~/.zshenv` and the application launcher source `shell/environment.sh`. It establishes XDG defaults without overriding existing values, adds `~/.local/bin` once and preserves `GNUPGHOME=~/.local/share/gnupg` unless explicitly set. Existing signing keys stay where they are. The terminal TTY is set interactively; gpg-agent is socket activated.
 
 Systemd owns parsing `environment.d` files. Shell startup does not run `export $(generator)` or evaluate environment-generator output. Such word splitting corrupts values containing spaces and treats shell-like data incorrectly. Start a fresh login session after changing session environment; an existing terminal inherits its session's values. For shells launched outside that session, put explicit trusted shell exports in `shell/environment.local.sh`, rather than sourcing environment.d as a shell program.
 

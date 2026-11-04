@@ -4,7 +4,7 @@ The repository is source; `home/` mirrors selected paths below your home directo
 `manifest.json` is the complete deployment allowlist:
 
 ```json
-{"version": 1, "paths": [".zshenv", ".config/tofi/config"]}
+{"version": 1, "paths": [".zshenv", ".config/fuzzel/fuzzel.ini"]}
 ```
 
 Only named files and symlinks are deployed. Real directories cannot be entries;

@@ -1,19 +1,19 @@
 # Fuzzel and emoji usage sorting
 
-Fuzzel 1.15.0 is the active backend for Super+Space (apps), Super+V (clipboard) and Super+F1 (emoji). Tofi remains an optional fallback; use `--picker tofi` to select it for emoji.
+Fuzzel 1.15.0 is the active backend for Super+Space (apps), Super+V (clipboard) and Super+F1 (emoji).
 
 ```sh
 # Applications
 fuzzel
 
 # Existing emoji picker, with native Fuzzel usage history; copies the choice
-~/.config/tofi/scripts/emoji-picker.sh --picker fuzzel
+~/.local/bin/emoji-picker --picker fuzzel
 
 # Print the choice instead of copying
-~/.config/tofi/scripts/emoji-picker.sh --picker fuzzel --echo
+~/.local/bin/emoji-picker --picker fuzzel --echo
 ```
 
-The Fuzzel config keeps Iosevka Curly, Mocha Pink, an 80% background, square corners and no icons. Its approximate square geometry is expressed in characters/rows rather than Tofi's exact pixel dimensions. Up, Down, Tab and Shift+Tab stop at the list ends. Enter accepts; Escape cancels. The counter shows matching entries versus total entries, not page numbers.
+The Fuzzel config keeps Iosevka Curly, Mocha Pink, an 80% background, square corners and no icons. Its approximate square geometry is expressed in characters/rows rather than fixed pixel dimensions. Up, Down, Tab and Shift+Tab stop at the list ends. Enter accepts; Escape cancels. The counter shows matching entries versus total entries, not page numbers.
 
 ## Native usage counts
 
@@ -29,9 +29,9 @@ The original plain Tofi emoji invocation did not pass a history file; its run/dr
 
 ## Checks
 
-The installed `fuzzel --check-config` validates all options, including the deployed config. All 40 regression/integration tests pass. Integration tests stub the UI to check picker selection, dedicated cache arguments with spaces, combined Unicode emoji output, cancellation and Fuzzel as the default and the explicit Tofi override. These tests do not claim to measure latency or implement Fuzzel's native sorting.
+The installed `fuzzel --check-config` validates all options, including the deployed config. Integration tests stub the UI to check picker selection, dedicated cache arguments with spaces, combined Unicode emoji output, cancellation and Fuzzel as the default and rejection of the retired Tofi backend. These tests do not claim to measure latency or implement Fuzzel's native sorting.
 
-For a direct check, choose an emoji twice, reopen with an empty search, and check its position. Compare app/emoji startup responsiveness to Tofi. Existing SwayFX effects target the `launcher` namespace, also Fuzzel's default. See the installed `fuzzel(1)` cache documentation or [packaged upstream manual](https://manpages.debian.org/unstable/fuzzel/fuzzel.1.en.html).
+For a direct check, choose an emoji twice, reopen with an empty search, and check its position. Existing SwayFX effects target the `launcher` namespace, also Fuzzel's default. See the installed `fuzzel(1)` cache documentation or [packaged upstream manual](https://manpages.debian.org/unstable/fuzzel/fuzzel.1.en.html).
 
 ## Relaunch checks
 

@@ -57,7 +57,7 @@ Theme policy and component coverage are in [THEME.md](docs/THEME.md). Machine-sp
 
 ## Launcher and fonts
 
-[Fuzzel and emoji history](docs/FUZZEL.md) describes the active launcher, clipboard and emoji menus. Tofi remains an optional fallback. Iosevka Curly is the default UI/document/monospace family; apply session GSettings on a fresh machine with `python3 scripts/apply-ui-fonts.py --apply`.
+[Fuzzel and emoji history](docs/FUZZEL.md) describes the active launcher, clipboard and emoji menus. Iosevka Curly is the default UI/document/monospace family; apply session GSettings on a fresh machine with `python3 scripts/apply-ui-fonts.py --apply`.
 
 ## Desktop basics
 

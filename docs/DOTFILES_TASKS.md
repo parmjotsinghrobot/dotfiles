@@ -193,4 +193,8 @@ Suggested layout:
 
 ## Fuzzel and monospace follow-up
 
-Fuzzel is now active for apps, clipboard and emoji with separate native usage caches. The emoji script retains a Tofi override. Iosevka Curly is the UI/document/monospace default across toolkit settings and generic Fontconfig families; Dunst restores its original 13 pt monospace font. Sway and Dunst were reloaded. Tofi app history was converted by exact installed desktop-name matching and merged into Fuzzel; private reports retain unmatched names. See FUZZEL.md, FONTS.md and HISTORY_IMPORT.md.
+Fuzzel is now active for apps, clipboard and emoji with separate native usage caches. The emoji script now lives at `~/.local/bin/emoji-picker`; the retired Tofi backend has been removed. Iosevka Curly is the UI/document/monospace default across toolkit settings and generic Fontconfig families; Dunst restores its original 13 pt monospace font. Sway and Dunst were reloaded. Tofi app history was converted by exact installed desktop-name matching and merged into Fuzzel; private reports retain unmatched names. See FUZZEL.md, FONTS.md and HISTORY_IMPORT.md.
+
+## Retired components (4 November 2026)
+
+Bash startup files, Cava and Tofi are no longer deployed or listed as dependencies. Earlier completed tasks above record the migration history. The emoji picker moved to `~/.local/bin/emoji-picker`; Fuzzel app and emoji usage caches are unchanged. The historical Tofi importer remains available for recovery, and the installed-package snapshot remains a dated record.

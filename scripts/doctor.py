@@ -22,12 +22,11 @@ REQUIRED = {
     'antidot': 'antidot-bin', 'zsh': 'zsh', 'git': 'git', 'curl': 'curl',
     'fc-match': 'fontconfig', 'xdg-user-dir': 'xdg-user-dirs', 'gpgconf': 'gnupg',
 }
-OPTIONAL = {'tofi': 'tofi; retained fallback launcher',
-            'checkupdates': 'pacman-contrib; optional update greeting',
+OPTIONAL = {'checkupdates': 'pacman-contrib; optional update greeting',
             'wtype': 'wtype; emoji typing on Wayland',
             'xclip': 'xclip; emoji clipboard on X11',
             'xdotool': 'xdotool; emoji typing on X11',
-            'btop': 'btop', 'cava': 'cava', 'peaclock': 'peaclock'}
+            'btop': 'btop', 'peaclock': 'peaclock'}
 
 
 def run(*args):
@@ -93,7 +92,7 @@ def main():
         '.zshenv', '.config/zsh/zshrc', '.config/kitty/current-theme.conf',
         '.config/sway/swaybar/status.py', '.local/bin/sticky-notes-daemon.py',
         '.local/bin/clipboard-picker', '.local/bin/launch-app',
-        '.config/tofi/scripts/emoji-picker.sh',
+        '.local/bin/emoji-picker',
         '.config/zsh/themes/passion/passion.zsh-theme',
         '.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh',
         '.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh',
