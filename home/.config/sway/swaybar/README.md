@@ -9,7 +9,7 @@ focused workspace, Pink outlined workspaces visible on other monitors,
 Subtext0 inactive labels and Red urgency highlights.
 The status line contains, in order: playing media, a `|` separator,
 Bluetooth icon, memory-chip icon and
-percentage, volume, brightness, battery, time, short date. Each icon sits beside
+percentage, volume, brightness, battery, coffee toggle, time, short date. Each icon sits beside
 its value, with spacing between groups. The native tray is at the far right;
 its nm-applet icon provides network status.
 
@@ -21,9 +21,24 @@ Uses the existing Python 3/PyGObject and wpctl installations. Media properties
 are queried directly over D-Bus with a 600 ms timeout per player, so a hung
 browser is skipped without libplayerctl aborting the status process. No additional
 status-bar package. Each module refreshes independently.
+Polling failures clear that module's stale reading and retry automatically;
+unexpected exceptions cannot permanently stop a module's worker. Repeated
+identical errors are logged once until the error changes or the module recovers.
+Volume readings remain available when only the optional device-icon lookup fails.
 
-Only native workspace buttons and tray icons respond to clicks. Workspace
-scrolling is disabled. All status blocks are display-only: no media controls,
+The volume keys call `status.py --volume up|down|mute`, sharing the bar's
+`@DEFAULT_AUDIO_SINK@` target. WirePlumber resolves it on every command and
+reading, so default-output changes to Bluetooth or USB need no config reload.
+Steps remain 5%, raising is capped at 100%, and mute toggles without changing
+the volume. This follows the default output, not a separately routed app stream.
+
+Left-click `☕ OFF` to keep the session awake; `☕ ON` is Pink while active.
+Click again to release it. The bar holds a logind `idle` inhibitor, respected
+by the existing swayidle configuration. Closing/restarting the status provider
+also releases it; it starts off. It does not block explicit suspend or lid-close
+actions. Failure to acquire the inhibitor leaves it off and logs the error.
+Native workspace buttons and tray menus still work. Workspace scrolling is
+disabled. Other status blocks remain display-only: no media controls,
 brightness/volume scrolling, mixer launcher or Bluetooth toggle.
 
 Audio idle inhibition runs separately from the bar via
@@ -46,7 +61,8 @@ sway -C -c ~/.config/sway/config && swaymsg reload && pkill -x waybar
 ```
 
 Check the bar on each monitor, tray menus, Bluetooth state, memory percentage,
-mute/output changes, brightness readings and battery state.
+mute/output changes, brightness readings and battery state. Toggle coffee and
+check `systemd-inhibit --list` for `swaybar coffee`; toggle off to release it.
 Reloading does not stop an already-running sway-audio-idle-inhibit process;
 stop it separately if needed.
 
