@@ -66,6 +66,8 @@ def main():
     else:
         print('REVIEW FX/effects variants manually; pacman unavailable.')
     for label, code in (
+        ('GTK overlay / Cairo / GtkLayerShell 0.1',
+         "import cairo, gi; gi.require_version('Gtk', '3.0'); gi.require_version('GtkLayerShell', '0.1'); from gi.repository import Gtk, GtkLayerShell, PangoCairo"),
         ('PyGObject / Gio / GLib / Playerctl 2.0',
          "import gi; gi.require_version('Playerctl', '2.0'); from gi.repository import Gio, GLib, Playerctl"),
         ('i3ipc', 'import i3ipc'),

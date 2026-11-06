@@ -24,6 +24,15 @@ sends desktop notifications using `libnotify` (`notify-send`). Both are included
 in `desktop-official.txt`. It requires Linux PSI at `/proc/pressure/memory` and
 a running notification daemon.
 
+Hardware keys use a small GTK volume/brightness overlay with a percentage label
+(`gtk3`, `gtk-layer-shell`, `python-gobject`, `python-cairo`). The user socket
+`sway-osd.socket` starts it on the first keypress, using the Wayland environment
+imported into the user systemd manager by the desktop session. The FIFO is
+private to the user. Hardware keys adjust the device directly before requesting
+background feedback, avoiding per-key Python startup. Overlay geometry and colours live in
+`.config/sway/swaybar/osd.ini`;
+regular Dunst notifications are independent.
+
 ## Fonts and visual assets
 
 | Asset | Installed package/source | Setting |

@@ -26,11 +26,32 @@ unexpected exceptions cannot permanently stop a module's worker. Repeated
 identical errors are logged once until the error changes or the module recovers.
 Volume readings remain available when only the optional device-icon lookup fails.
 
-The volume keys call `status.py --volume up|down|mute`, sharing the bar's
+The volume keys invoke `wpctl` directly, sharing the bar's
 `@DEFAULT_AUDIO_SINK@` target. WirePlumber resolves it on every command and
 reading, so default-output changes to Bluetooth or USB need no config reload.
 Steps remain 5%, raising is capped at 100%, and mute toggles without changing
 the volume. This follows the default output, not a separately routed app stream.
+The shortcuts adjust the device before requesting feedback from the existing
+overlay over its FIFO. There is no Python startup before the adjustment.
+Percentage queries run on the overlay's background worker, with queued refreshes
+coalesced to the newest request. They cannot delay an adjustment or the fade.
+The overlay starts once at Sway login to avoid loading GTK on the first press.
+The manual `status.py --volume up|down|mute` and `--brightness up|down` commands
+remain available. D-Bus loads only for the bar itself.
+
+Volume, mute and brightness keys also update one small GTK overlay (220 × 28 px,
+bottom centre, 900 ms hold then 180 ms fade), with a bar and percentage label.
+Volume is Pink, brightness Yellow and muted volume is
+dimmed while retaining the stored level. Brightness steps remain 5%. This adds
+no Dunst notifications or history entries. Configure size, position, colours
+and timeout in `~/.config/sway/swaybar/osd.ini`. The `sway-osd.socket` user unit owns
+`$XDG_RUNTIME_DIR/sway-osd.fifo` and starts the overlay on demand. After deploying new
+files, run `systemctl --user daemon-reload` and
+`systemctl --user enable --now sway-osd.socket`. For later overlay config edits,
+restart `sway-osd.service`.
+The renderer handles fading because SwayFX 0.6 does not animate layer-shell
+surfaces. Another keypress cancels the fade and restores full opacity; setting
+`fade = 0` disables it.
 
 Left-click `☕ OFF` to keep the session awake; `☕ ON` is Pink while active.
 Click again to release it. The bar holds a logind `idle` inhibitor, respected

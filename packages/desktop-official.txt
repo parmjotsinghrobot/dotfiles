@@ -13,6 +13,8 @@ git
 gnupg
 grim
 gsettings-desktop-schemas
+gtk-layer-shell
+gtk3
 kitty
 less
 libnotify
@@ -25,6 +27,7 @@ pipewire-alsa
 pipewire-pulse
 playerctl
 python
+python-cairo
 python-gobject
 python-i3ipc
 slurp

@@ -8,16 +8,20 @@ import os
 from pathlib import Path
 import re
 import signal
+import stat
 import subprocess
 import sys
 import threading
 
-import gi
-
-from gi.repository import Gio, GLib
-
-
 DEFAULT_SINK = "@DEFAULT_AUDIO_SINK@"
+Gio = GLib = None
+
+
+def load_dbus():
+    # Hardware keys only need subprocesses and the FIFO. Loading GI for every
+    # keypress adds substantial latency, especially while a key is repeating.
+    global Gio, GLib
+    from gi.repository import Gio, GLib
 
 
 def run(*args):
@@ -86,13 +90,18 @@ def memory():
     return [block("memory", f" {percent}%")]
 
 
-def volume():
+def read_volume():
     text = run("wpctl", "get-volume", DEFAULT_SINK)
     match = re.fullmatch(r"Volume:\s+(\d+(?:\.\d+)?)\s*(\[MUTED\])?", text)
     if match is None:
         raise ValueError(f"unexpected wpctl volume response: {text!r}")
     percent = int(float(match[1]) * 100 + 0.5)
     muted = match[2] is not None
+    return percent, muted
+
+
+def volume():
+    percent, muted = read_volume()
     # Device metadata is optional: reconnecting a headset can invalidate its ID
     # between these queries. Keep displaying the volume with a generic icon.
     properties = ""
@@ -120,6 +129,37 @@ def adjust_volume(action):
         "mute": ("set-mute", DEFAULT_SINK, "toggle"),
     }
     run("wpctl", *commands[action])
+
+
+def adjust_brightness(action):
+    steps = {"up": "5%+", "down": "5%-"}
+    text = run("brightnessctl", "--machine-readable", "set", steps[action])
+    return parse_brightness(text)
+
+
+def read_brightness():
+    return parse_brightness(run("brightnessctl", "--machine-readable", "info"))
+
+
+def parse_brightness(text):
+    fields = text.split(",")
+    if len(fields) != 5 or not re.fullmatch(r"\d+%", fields[3]):
+        raise ValueError(f"unexpected brightnessctl response: {text!r}")
+    return int(fields[3][:-1])
+
+
+def show_osd(percent, style):
+    runtime = os.environ.get("XDG_RUNTIME_DIR")
+    if not runtime:
+        raise OSError("XDG_RUNTIME_DIR is not set")
+    # Nonblocking writes keep a stopped/absent overlay from delaying the keys.
+    fd = os.open(Path(runtime) / "sway-osd.fifo", os.O_WRONLY | os.O_NONBLOCK | os.O_NOFOLLOW)
+    try:
+        if not stat.S_ISFIFO(os.fstat(fd).st_mode):
+            raise OSError("sway-osd.fifo is not a FIFO")
+        os.write(fd, f"{max(0, min(100, percent))} {style}\n".encode())
+    finally:
+        os.close(fd)
 
 
 class IdleInhibitor:
@@ -233,13 +273,29 @@ def main():
     mode.add_argument("--once", action="store_true", help="print a single JSON snapshot")
     mode.add_argument("--volume", choices=("up", "down", "mute"),
                       help="adjust the same default output that the bar reports")
+    mode.add_argument("--brightness", choices=("up", "down"),
+                      help="adjust brightness by 5% and show the overlay")
     args = parser.parse_args()
-    if args.volume:
+    if args.volume or args.brightness:
         try:
-            adjust_volume(args.volume)
-        except (OSError, subprocess.SubprocessError) as error:
-            parser.exit(1, f"volume: {error}\n")
+            if args.volume:
+                adjust_volume(args.volume)
+            else:
+                percent = adjust_brightness(args.brightness)
+        except (OSError, subprocess.SubprocessError, ValueError) as error:
+            parser.exit(1, f"adjustment: {error}\n")
+        # Feedback is best-effort: a missing OSD must not fail an adjustment.
+        try:
+            if args.volume:
+                percent, muted = read_volume()
+                style = "muted" if muted else "volume"
+            else:
+                style = "brightness"
+            show_osd(percent, style)
+        except (OSError, subprocess.SubprocessError, ValueError) as error:
+            print(f"osd: {error}", file=sys.stderr)
         return
+    load_dbus()
     cache, lock, changed = {}, threading.Lock(), threading.Event()
     errors = {}
     stop = threading.Event()

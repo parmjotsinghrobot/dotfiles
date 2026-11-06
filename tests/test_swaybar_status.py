@@ -2,9 +2,11 @@
 import importlib.util
 import io
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 import unittest
 from unittest.mock import Mock, patch
 
@@ -13,6 +15,7 @@ STATUS = Path(__file__).resolve().parents[1] / 'home/.config/sway/swaybar/status
 SPEC = importlib.util.spec_from_file_location('swaybar_status', STATUS)
 status = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(status)
+status.load_dbus()
 
 
 class SwaybarStatusTests(unittest.TestCase):
@@ -51,10 +54,64 @@ class SwaybarStatusTests(unittest.TestCase):
         for action in ('up', 'down', 'mute'):
             with self.subTest(action=action), patch.object(sys, 'argv', ['status.py', '--volume', action]), \
                     patch.object(status, 'adjust_volume') as adjust, \
+                    patch.object(status, 'read_volume', return_value=(45, action == 'mute')), \
+                    patch.object(status, 'show_osd') as osd, \
                     patch.object(status.threading, 'Thread') as thread:
                 status.main()
                 adjust.assert_called_once_with(action)
+                osd.assert_called_once_with(45, 'muted' if action == 'mute' else 'volume')
                 thread.assert_not_called()
+
+    def test_brightness_commands_keep_five_percent_steps(self):
+        for action, step in [('up', '5%+'), ('down', '5%-')]:
+            with self.subTest(action=action), patch.object(status, 'run',
+                    return_value='intel_backlight,backlight,33600,35%,96000') as run:
+                self.assertEqual(status.adjust_brightness(action), 35)
+                run.assert_called_once_with('brightnessctl', '--machine-readable', 'set', step)
+        with patch.object(status, 'run', return_value='bad response'):
+            with self.assertRaises(ValueError):
+                status.adjust_brightness('up')
+
+    def test_brightness_cli_reports_result_without_starting_workers(self):
+        with patch.object(sys, 'argv', ['status.py', '--brightness', 'down']), \
+                patch.object(status, 'adjust_brightness', return_value=35) as adjust, \
+                patch.object(status, 'show_osd') as osd, \
+                patch.object(status.threading, 'Thread') as thread:
+            status.main()
+            adjust.assert_called_once_with('down')
+            osd.assert_called_once_with(35, 'brightness')
+            thread.assert_not_called()
+
+    def test_feedback_failure_does_not_fail_successful_adjustment(self):
+        for arguments, error in [(['--volume', 'up'], FileNotFoundError('no FIFO')),
+                                 (['--brightness', 'up'], BlockingIOError('full FIFO'))]:
+            with self.subTest(arguments=arguments), \
+                    patch.object(sys, 'argv', ['status.py', *arguments]), \
+                    patch.object(status, 'adjust_volume'), \
+                    patch.object(status, 'read_volume', return_value=(35, False)), \
+                    patch.object(status, 'adjust_brightness', return_value=35), \
+                    patch.object(status, 'show_osd', side_effect=error), \
+                    patch.object(sys, 'stderr', io.StringIO()) as errors:
+                status.main()
+                self.assertIn('osd:', errors.getvalue())
+
+    def test_osd_fifo_protocol_and_nonblocking_missing_reader(self):
+        with tempfile.TemporaryDirectory() as runtime, \
+                patch.dict(os.environ, {'XDG_RUNTIME_DIR': runtime}):
+            fifo = Path(runtime) / 'sway-osd.fifo'
+            os.mkfifo(fifo, 0o600)
+            # No reader must fail immediately, rather than hanging a keypress.
+            with self.assertRaises(OSError):
+                status.show_osd(50, 'volume')
+            reader = os.open(fifo, os.O_RDONLY | os.O_NONBLOCK)
+            try:
+                for percent, style, expected in [(35, 'volume', b'35 volume\n'),
+                                                 (110, 'brightness', b'100 brightness\n'),
+                                                 (35, 'muted', b'35 muted\n')]:
+                    status.show_osd(percent, style)
+                    self.assertEqual(os.read(reader, 128), expected)
+            finally:
+                os.close(reader)
 
     def test_volume_cli_rejects_unknown_actions_and_reports_command_failure(self):
         for arguments, error, expected_code in [
@@ -72,11 +129,53 @@ class SwaybarStatusTests(unittest.TestCase):
             if expected_code == 2:
                 run.assert_not_called()
 
-    def test_keybindings_dispatch_to_shared_volume_handler(self):
+    def test_hardware_shortcuts_do_not_import_dbus_libraries(self):
+        # A fresh process catches imports performed before main(), too.
+        code = '''
+import importlib.util
+import sys
+spec = importlib.util.spec_from_file_location('status', sys.argv[1])
+s = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(s)
+s.run = lambda *args: 'Volume: 0.35' if args[0] == 'wpctl' else 'backlight,backlight,35,35%,100'
+s.show_osd = lambda *args: None
+for option in ('--volume', '--brightness'):
+    sys.argv = ['status.py', option, 'up']
+    s.main()
+    assert 'gi' not in sys.modules
+'''
+        subprocess.run([sys.executable, '-B', '-c', code, str(STATUS)],
+                       capture_output=True, text=True, check=True, timeout=5)
+
+    def test_keybindings_adjust_reported_sink_before_requesting_feedback(self):
         config = (STATUS.parent.parent / 'config.d/30-keybinds.conf').read_text()
-        for key, action in [('RaiseVolume', 'up'), ('LowerVolume', 'down'), ('Mute', 'mute')]:
-            self.assertIn(f'bindsym XF86Audio{key} exec python3 '
-                          f'~/.config/sway/swaybar/status.py --volume {action}', config)
+        commands = {'RaiseVolume': f'set-volume -l 1.0 {status.DEFAULT_SINK} 5%+',
+                    'LowerVolume': f'set-volume {status.DEFAULT_SINK} 5%-',
+                    'Mute': f'set-mute {status.DEFAULT_SINK} toggle'}
+        for key, command in commands.items():
+            self.assertIn(f'bindsym XF86Audio{key} exec wpctl {command} '
+                          "&& printf 'refresh volume\\n'", config)
+        for key, step in [('Down', '5%-'), ('Up', '5%+')]:
+            self.assertIn(f'bindsym XF86MonBrightness{key} exec brightnessctl set {step} '
+                          "&& printf 'refresh brightness\\n'", config)
+
+    def test_direct_shortcut_notifies_only_after_successful_adjustment(self):
+        config = (STATUS.parent.parent / 'config.d/30-keybinds.conf').read_text()
+        command = next(line.split(' exec ', 1)[1] for line in config.splitlines()
+                       if line.startswith('bindsym XF86AudioRaiseVolume '))
+        with tempfile.TemporaryDirectory() as runtime:
+            fake = Path(runtime) / 'wpctl'
+            fake.write_text('#!/bin/sh\nexit "${KEY_TEST_EXIT:-0}"\n')
+            fake.chmod(0o755)
+            fifo = Path(runtime) / 'sway-osd.fifo'
+            env = {**os.environ, 'XDG_RUNTIME_DIR': runtime,
+                   'PATH': runtime + ':' + os.environ['PATH'], 'KEY_TEST_EXIT': '3'}
+            failure = subprocess.run(['/bin/sh', '-c', command], env=env, timeout=2)
+            self.assertEqual(failure.returncode, 3)
+            self.assertFalse(fifo.exists())
+            env['KEY_TEST_EXIT'] = '0'
+            subprocess.run(['/bin/sh', '-c', command], env=env, check=True, timeout=2)
+            self.assertEqual(fifo.read_text(), 'refresh volume\n')
 
     def test_coffee_toggles_real_descriptor_lifetime_and_colour(self):
         inhibitor = status.IdleInhibitor()

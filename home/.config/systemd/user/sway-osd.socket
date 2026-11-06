@@ -1,0 +1,10 @@
+[Unit]
+Description=Hardware-key overlay input
+
+[Socket]
+ListenFIFO=%t/sway-osd.fifo
+SocketMode=0600
+RemoveOnStop=true
+
+[Install]
+WantedBy=default.target
