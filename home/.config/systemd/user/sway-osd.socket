@@ -2,6 +2,8 @@
 Description=Hardware-key overlay input
 
 [Socket]
+# Older shortcuts could leave a regular file here while the socket was down.
+ExecStartPre=/bin/sh -c 'if [ -f "$$1" ] && [ ! -L "$$1" ]; then rm -- "$$1"; fi' sh %t/sway-osd.fifo
 ListenFIFO=%t/sway-osd.fifo
 SocketMode=0600
 RemoveOnStop=true

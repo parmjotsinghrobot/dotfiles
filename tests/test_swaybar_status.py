@@ -154,15 +154,19 @@ for option in ('--volume', '--brightness'):
                     'Mute': f'set-mute {status.DEFAULT_SINK} toggle'}
         for key, command in commands.items():
             self.assertIn(f'bindsym XF86Audio{key} exec wpctl {command} '
-                          "&& printf 'refresh volume\\n'", config)
+                          "&& $osd-ready && printf 'refresh volume\\n'", config)
         for key, step in [('Down', '5%-'), ('Up', '5%+')]:
             self.assertIn(f'bindsym XF86MonBrightness{key} exec brightnessctl set {step} '
-                          "&& printf 'refresh brightness\\n'", config)
+                          "&& $osd-ready && printf 'refresh brightness\\n'", config)
 
     def test_direct_shortcut_notifies_only_after_successful_adjustment(self):
         config = (STATUS.parent.parent / 'config.d/30-keybinds.conf').read_text()
         command = next(line.split(' exec ', 1)[1] for line in config.splitlines()
                        if line.startswith('bindsym XF86AudioRaiseVolume '))
+        for name in ('$osd-ready', '$osd-write', '$osd-fifo'):
+            value = next(line.split(' ', 2)[2] for line in config.splitlines()
+                         if line.startswith(f'set {name} '))
+            command = command.replace(name, value)
         with tempfile.TemporaryDirectory() as runtime:
             fake = Path(runtime) / 'wpctl'
             fake.write_text('#!/bin/sh\nexit "${KEY_TEST_EXIT:-0}"\n')
@@ -174,8 +178,19 @@ for option in ('--volume', '--brightness'):
             self.assertEqual(failure.returncode, 3)
             self.assertFalse(fifo.exists())
             env['KEY_TEST_EXIT'] = '0'
-            subprocess.run(['/bin/sh', '-c', command], env=env, check=True, timeout=2)
-            self.assertEqual(fifo.read_text(), 'refresh volume\n')
+            subprocess.run(['/bin/sh', '-c', command], env=env, timeout=2)
+            self.assertFalse(fifo.exists())
+            fifo.write_text('stale file\n')
+            subprocess.run(['/bin/sh', '-c', command], env=env, timeout=2)
+            self.assertEqual(fifo.read_text(), 'stale file\n')
+            fifo.unlink()
+            os.mkfifo(fifo, 0o600)
+            reader = os.open(fifo, os.O_RDONLY | os.O_NONBLOCK)
+            try:
+                subprocess.run(['/bin/sh', '-c', command], env=env, check=True, timeout=2)
+                self.assertEqual(os.read(reader, 128), b'refresh volume\n')
+            finally:
+                os.close(reader)
 
     def test_coffee_toggles_real_descriptor_lifetime_and_colour(self):
         inhibitor = status.IdleInhibitor()

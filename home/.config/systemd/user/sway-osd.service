@@ -1,8 +1,9 @@
 [Unit]
 Description=Small volume and brightness overlay
+BindsTo=sway-osd.socket
+After=sway-osd.socket
 
 [Service]
 ExecStart=/usr/bin/python3 %h/.config/sway/swaybar/osd.py
 StandardInput=socket
-Restart=on-failure
-RestartSec=1
+StandardOutput=journal

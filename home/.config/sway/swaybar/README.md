@@ -35,7 +35,8 @@ The shortcuts adjust the device before requesting feedback from the existing
 overlay over its FIFO. There is no Python startup before the adjustment.
 Percentage queries run on the overlay's background worker, with queued refreshes
 coalesced to the newest request. They cannot delay an adjustment or the fade.
-The overlay starts once at Sway login to avoid loading GTK on the first press.
+Sway login resets failed overlay units and starts the renderer on the current
+Wayland display. Shortcuts send feedback only while the FIFO is available.
 The manual `status.py --volume up|down|mute` and `--brightness up|down` commands
 remain available. D-Bus loads only for the bar itself.
 
