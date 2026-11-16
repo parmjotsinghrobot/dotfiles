@@ -15,7 +15,9 @@ credentials, browser profiles, caches and histories out of the repository.
 ## Preview and apply
 
 Python 3.9+ is required. Initialise the documented Git submodules and install the
-documented dependencies before deployment. No packages are installed and no running services are restarted by this script.
+documented dependencies before links-only deployment. Optional `--setup`,
+`--install-packages` and `--feature` actions are described in [SETUP.md](SETUP.md).
+Without these flags no packages are installed and no running services are restarted.
 The managed memory-monitor unit and its `default.target.wants` link enable it
 for the next login; see the README for immediate activation.
 
@@ -41,6 +43,9 @@ tool never links an entire app directory unless the source entry is itself an
 explicit asset symlink. Source symlinks must resolve within `home/`, or within
 `/usr/share/themes` or `/usr/share/icons` for installed theme assets. Missing
 sources, missing system themes and dangling nested asset links cause an error.
+A package setup preview can mark missing system theme assets as `PENDING`;
+apply still requires those assets after package installation. Missing repository
+files and destination conflicts are checked before package operations.
 The `.local/state/dotfiles-deploy` location is reserved for recovery metadata.
 
 ## Rollback

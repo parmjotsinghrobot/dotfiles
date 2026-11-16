@@ -62,10 +62,17 @@ The emoji script defaults to the Wayland clipboard (`fuzzel`, `wl-copy`). Waylan
 
 Engineering manifests list only locally installed, relevant tools: C/C++ builds, debugging, serial access, FPGA loading, SPIM, circuit simulation, MATLAB installer tooling, Pylon and Typst. They are examples for this user's coursework, not a universal course environment. Quartus/Nios II, MATLAB itself, PSoC tools and Basler camera support can require separate vendor installations, licenses, udev rules and target hardware. `matlab-mpm` is an installer, not proof MATLAB is installed. The recorded `QSYS_ROOTDIR` in old startup files pointed into a missing Paru build cache; never recreate that cache path as an installation strategy. Select the installed Quartus version and its `quartus/sopc_builder/bin` explicitly in a machine-local profile. ARM embedded compiler packages are not installed in this snapshot. Configure serial-device permissions and validate USB/JTAG access separately.
 
+## Automated package selection
+
+`./install.sh --setup` previews a guided installation using these lists; add
+`--apply` to execute it. See [SETUP.md](SETUP.md). Lists remain editable and
+are not a live package catalog: review foreign package sources and resolve
+renamed/unavailable packages on the target distribution.
+
 ## Rebuild sequence
 
 1. Install Arch and establish graphics drivers, network access, a login/session mechanism and normal user permissions for the target machine. These are outside the selected dotfile manifests.
-2. Review `desktop-official.txt` and `appearance-official.txt`, then install those packages using the machine's package manager. Review/rebuild their `aur-local` counterparts from trusted package sources. Keep optional applications and engineering tools separate. Do not install stock Sway or stock swaylock alongside their conflicting forks.
+2. Review `desktop-official.txt` and `appearance-official.txt`, then install those packages using the machine's package manager. Review/rebuild their `aur-local` counterparts from trusted package sources. The optional installer can perform these steps via `--install-packages all --aur-helper paru` (or `yay`). Keep optional applications and engineering tools separate. Do not install stock Sway or stock swaylock alongside their conflicting forks.
 3. Initialise the repository's pinned Zsh submodules from its root: `git submodule update --init --recursive`. The three upstreams are [passion](https://github.com/ChesterYue/ohmyzsh-theme-passion), [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions), and [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting). The small OMZ git library is a managed file, not one of those submodules.
 4. Follow the repository deployment guide and inspect its dry run before deploying. Supply the private wallpaper or a local replacement, screenshot directory, optional emoji cache, machine outputs and any required engineering paths.
 5. Run `python3 scripts/doctor.py` from the repository (or use its absolute path from any working directory). `--home /path/to/test-home` checks deployment files in a temporary home while commands, fonts and system theme assets remain checks of the current machine. Exit status is 1 for missing required checks and 0 otherwise; optional omissions do not fail it.

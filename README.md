@@ -15,7 +15,19 @@ cd ~/dotfiles
 
 The public remote must contain this migration before that clone command can reproduce it. This work does not push changes.
 
-Review [dependencies](docs/DEPENDENCIES.md), install the relevant packages, then:
+For guided Arch package installation and optional features, run:
+
+```sh
+./install.sh --setup          # ask questions and preview
+./install.sh --setup --apply  # ask questions and apply
+```
+
+Setup offers desktop/appearance packages, foreign packages via an existing Paru/Yay,
+everyday utilities, engineering tools, emoji typing, Bluetooth, NetworkManager,
+session fonts and the existing daily-nonsense email timer. Read
+[setup options](docs/SETUP.md) for command-line selection and mail prerequisites.
+
+For links only, review [dependencies](docs/DEPENDENCIES.md), install the relevant packages, then:
 
 ```sh
 cd ~/dotfiles
@@ -24,7 +36,7 @@ python3 scripts/doctor.py
 ./install.sh --apply
 ```
 
-The first installer command previews the changes. Apply backs up existing individual files privately, then links them to this checkout. Reapplying keeps existing managed links. It does not install packages, reload the compositor, restart services or log you out.
+The first installer command previews the changes. Apply backs up existing individual files privately, then links them to this checkout. Reapplying keeps existing managed links. Without setup options it only deploys files; it does not install packages or change running services. Setup runs only the package/feature actions you select. Neither mode reloads the compositor or logs you out.
 
 The source checkout must stay at its deployed location. Preview against an isolated home with `./install.sh --target-home /tmp/dotfiles-preview`; use an empty directory outside this checkout.
 

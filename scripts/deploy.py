@@ -5,6 +5,7 @@ import datetime
 import json
 import os
 from pathlib import Path, PurePosixPath
+import subprocess
 import sys
 import uuid
 
@@ -46,11 +47,22 @@ def check_parents(target, relative):
             raise ValueError(f'unsafe destination parent: {current}')
 
 
-def check_source(root, relative):
+def system_asset_path(path):
+    try:
+        resolved = path.resolve(strict=False)
+    except (OSError, RuntimeError):
+        return False
+    return any(resolved.is_relative_to(root) for root in SYSTEM_ASSETS)
+
+
+def check_source(root, relative, pending_assets=False):
     source = root / relative
     try:
         resolved = source.resolve(strict=True)
     except (OSError, RuntimeError) as error:
+        if pending_assets and source.is_symlink() and system_asset_path(source):
+            print(f'PENDING system theme asset: {source}')
+            return source
         raise ValueError(f'missing or dangling source: {source}: {error}') from error
     def allowed(path):
         return path.is_relative_to(root.resolve()) or any(path.is_relative_to(p) for p in SYSTEM_ASSETS)
@@ -70,6 +82,9 @@ def check_source(root, relative):
                     try:
                         linked = dependency.resolve(strict=True)
                     except (OSError, RuntimeError) as error:
+                        if pending_assets and system_asset_path(dependency):
+                            print(f'PENDING system theme asset: {dependency}')
+                            continue
                         raise ValueError(f'dangling asset dependency: {dependency}') from error
                     if not allowed(linked):
                         raise ValueError(f'asset dependency escapes home subtree: {dependency}')
@@ -87,7 +102,9 @@ def save_journal(directory, data):
     temporary.replace(directory / 'journal.json')
 
 
-def deploy(repo, target, apply=False):
+def deploy(repo, target, apply=False, pending_assets=False):
+    if apply and pending_assets:
+        raise ValueError('pending assets are permitted only in setup previews')
     if target.resolve().is_relative_to(repo.resolve()):
         raise ValueError('target home must not be inside the source checkout')
     manifest = json.loads((repo / 'manifest.json').read_text())
@@ -97,7 +114,7 @@ def deploy(repo, target, apply=False):
     changes = []
     for relative in paths:
         check_parents(target, relative)
-        source = check_source(repo / 'home', relative)
+        source = check_source(repo / 'home', relative, pending_assets)
         destination = target / relative
         if destination.is_dir() and not destination.is_symlink():
             raise ValueError(f'refusing to replace a real directory: {destination}')
@@ -195,16 +212,57 @@ def main():
     parser.add_argument('--apply', action='store_true', help='write changes (default: dry run)')
     parser.add_argument('--target-home', type=Path, default=Path.home())
     parser.add_argument('--rollback', metavar='RUN_ID', help='preview or restore one recovery run')
+    # Keep direct imports of deploy.py independent of script search paths.
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('dotfiles_setup', REPO / 'scripts/setup.py')
+    setup = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(setup)
+    setup.add_arguments(parser)
     args = parser.parse_args()
     target = args.target_home.expanduser().absolute()
     try:
+        requested = args.setup or args.install_packages or args.feature or args.aur_helper
         if args.rollback:
+            if requested:
+                raise ValueError('rollback cannot be combined with package/feature setup')
             rollback(target, args.rollback, args.apply)
+        elif requested:
+            setup.select(args)
+            before, after = setup.plan(REPO, args)
+            setup.validate(REPO, target, args, before + after)
+            # Validate destination boundaries before any package transaction.
+            if target.resolve().is_relative_to(REPO.resolve()):
+                raise ValueError('target home must not be inside the source checkout')
+            manifest = json.loads((REPO / 'manifest.json').read_text())
+            if not isinstance(manifest, dict) or manifest.get('version') != 1:
+                raise ValueError('manifest must be an object with version 1')
+            paths = safe_paths(manifest.get('paths'))
+            for relative in paths:
+                check_source(REPO / 'home', relative, bool(before))
+                check_parents(target, relative)
+                destination = target / relative
+                if destination.is_dir() and not destination.is_symlink():
+                    raise ValueError(f'refusing to replace a real directory: {destination}')
+            check_parents(target, STATE / 'run')
+            print('Setup order: packages -> dotfile links -> selected features.')
+            print('Package, service and font changes are outside dotfile rollback.')
+            if args.apply:
+                setup.execute(before)
+                deploy(REPO, target, True)
+                setup.execute(after)
+            else:
+                setup.show(before)
+                deploy(REPO, target, pending_assets=bool(before))
+                setup.show(after)
+                print('Setup preview only; use the same options with --apply to run them.')
         else:
             deploy(REPO, target, args.apply)
-    except (OSError, ValueError, KeyError, TypeError) as error:
+    except (OSError, ValueError, KeyError, TypeError, subprocess.CalledProcessError, EOFError) as error:
         print(f'Error: {error}', file=sys.stderr)
         return 1
+    except KeyboardInterrupt:
+        print('\nCancelled. Review any completed package or deployment operations.', file=sys.stderr)
+        return 130
     return 0
 
 
